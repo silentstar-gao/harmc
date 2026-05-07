@@ -1,0 +1,2393 @@
+---
+queries:
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Best Practices/Likely Errors/CommaBeforeMisleadingIndentation.ql
+  relativeBqrsPath: codeql/cpp-queries/Best Practices/Likely Errors/CommaBeforeMisleadingIndentation.bqrs
+  metadata:
+    name: Comma before misleading indentation
+    description: "If expressions before and after a comma operator use different indentation,\
+      \ it is easy to misread the purpose of the code."
+    kind: problem
+    id: cpp/comma-before-misleading-indentation
+    problem.severity: warning
+    security-severity: 7.8
+    precision: medium
+    tags: |-
+      maintainability
+             readability
+             security
+             external/cwe/cwe-1078
+             external/cwe/cwe-670
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Best Practices/Likely Errors/OffsetUseBeforeRangeCheck.ql
+  relativeBqrsPath: codeql/cpp-queries/Best Practices/Likely Errors/OffsetUseBeforeRangeCheck.bqrs
+  metadata:
+    name: Array offset used before range check
+    description: |-
+      Accessing an array offset before checking the range means that
+                    the program may attempt to read beyond the end of a buffer
+    kind: problem
+    id: cpp/offset-use-before-range-check
+    problem.severity: warning
+    security-severity: 8.2
+    precision: medium
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-120
+             external/cwe/cwe-125
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Critical/DoubleFree.ql
+  relativeBqrsPath: codeql/cpp-queries/Critical/DoubleFree.bqrs
+  metadata:
+    name: Potential double free
+    description: Freeing a resource more than once can lead to undefined behavior
+      and cause memory corruption.
+    kind: path-problem
+    precision: high
+    id: cpp/double-free
+    problem.severity: warning
+    security-severity: 9.3
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-415
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Critical/IncorrectCheckScanf.ql
+  relativeBqrsPath: codeql/cpp-queries/Critical/IncorrectCheckScanf.bqrs
+  metadata:
+    name: Incorrect return-value check for a 'scanf'-like function
+    description: |-
+      Failing to account for EOF in a call to a scanf-like function can lead to
+                   undefined behavior.
+    kind: problem
+    problem.severity: warning
+    security-severity: 7.5
+    precision: high
+    id: cpp/incorrectly-checked-scanf
+    tags: |-
+      security
+             correctness
+             external/cwe/cwe-253
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Critical/MissingCheckScanf.ql
+  relativeBqrsPath: codeql/cpp-queries/Critical/MissingCheckScanf.bqrs
+  metadata:
+    name: Missing return-value check for a 'scanf'-like function
+    description: |-
+      Failing to check that a call to 'scanf' actually writes to an
+                    output variable can lead to unexpected behavior at reading time.
+    kind: path-problem
+    problem.severity: warning
+    security-severity: 7.5
+    precision: medium
+    id: cpp/missing-check-scanf
+    tags: |-
+      security
+             correctness
+             external/cwe/cwe-252
+             external/cwe/cwe-253
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Critical/NewFreeMismatch.ql
+  relativeBqrsPath: codeql/cpp-queries/Critical/NewFreeMismatch.bqrs
+  metadata:
+    name: Mismatching new/free or malloc/delete
+    description: An object that was allocated with 'malloc' or 'new' is being freed
+      using a mismatching 'free' or 'delete'.
+    kind: problem
+    problem.severity: warning
+    security-severity: 7.5
+    precision: high
+    id: cpp/new-free-mismatch
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-401
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Critical/OverflowStatic.ql
+  relativeBqrsPath: codeql/cpp-queries/Critical/OverflowStatic.bqrs
+  metadata:
+    name: Static array access may cause overflow
+    description: |-
+      Exceeding the size of a static array during write or access operations
+                    may result in a buffer overflow.
+    kind: problem
+    problem.severity: warning
+    security-severity: 9.3
+    precision: high
+    id: cpp/static-buffer-overflow
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-119
+             external/cwe/cwe-131
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Critical/SizeCheck.ql
+  relativeBqrsPath: codeql/cpp-queries/Critical/SizeCheck.bqrs
+  metadata:
+    name: Not enough memory allocated for pointer type
+    description: |-
+      Calling 'malloc', 'calloc' or 'realloc' without allocating enough memory to contain
+                    an instance of the type of the pointer may result in a buffer overflow
+    kind: problem
+    problem.severity: warning
+    security-severity: 8.1
+    precision: medium
+    id: cpp/allocation-too-small
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-131
+             external/cwe/cwe-122
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Critical/SizeCheck2.ql
+  relativeBqrsPath: codeql/cpp-queries/Critical/SizeCheck2.bqrs
+  metadata:
+    name: Not enough memory allocated for array of pointer type
+    description: |-
+      Calling 'malloc', 'calloc' or 'realloc' without allocating enough memory to contain
+                    multiple instances of the type of the pointer may result in a buffer overflow
+    kind: problem
+    problem.severity: warning
+    security-severity: 8.1
+    precision: medium
+    id: cpp/suspicious-allocation-size
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-131
+             external/cwe/cwe-122
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Critical/UseAfterFree.ql
+  relativeBqrsPath: codeql/cpp-queries/Critical/UseAfterFree.bqrs
+  metadata:
+    name: Potential use after free
+    description: An allocated memory block is used after it has been freed. Behavior
+      in such cases is undefined and can cause memory corruption.
+    kind: path-problem
+    precision: high
+    id: cpp/use-after-free
+    problem.severity: warning
+    security-severity: 9.3
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-416
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Diagnostics/ExtractedFiles.ql
+  relativeBqrsPath: codeql/cpp-queries/Diagnostics/ExtractedFiles.bqrs
+  metadata:
+    name: Extracted files
+    description: Lists all files in the source code directory that were extracted.
+    kind: diagnostic
+    id: cpp/diagnostics/successfully-extracted-files
+    tags: successfully-extracted-files
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Diagnostics/ExtractionWarnings.ql
+  relativeBqrsPath: codeql/cpp-queries/Diagnostics/ExtractionWarnings.bqrs
+  metadata:
+    name: Extraction warnings
+    description: List all extraction warnings for files in the source code directory.
+    kind: diagnostic
+    id: cpp/diagnostics/extraction-warnings
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Diagnostics/FailedExtractorInvocations.ql
+  relativeBqrsPath: codeql/cpp-queries/Diagnostics/FailedExtractorInvocations.bqrs
+  metadata:
+    name: Failed extractor invocations
+    description: Gives the command line of compilations for which extraction did not
+      run to completion.
+    kind: diagnostic
+    id: cpp/diagnostics/failed-extractor-invocations
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Arithmetic/BadAdditionOverflowCheck.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Arithmetic/BadAdditionOverflowCheck.bqrs
+  metadata:
+    name: Bad check for overflow of integer addition
+    description: |-
+      Checking for overflow of integer addition by comparing
+                    against one of the arguments of the addition does not work
+                    when the result of the addition is automatically promoted
+                    to a larger type.
+    kind: problem
+    problem.severity: error
+    security-severity: 8.1
+    precision: very-high
+    id: cpp/bad-addition-overflow-check
+    tags: |-
+      reliability
+             correctness
+             security
+             external/cwe/cwe-190
+             external/cwe/cwe-192
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Arithmetic/IntMultToLong.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Arithmetic/IntMultToLong.bqrs
+  metadata:
+    name: Multiplication result converted to larger type
+    description: |-
+      A multiplication result that is converted to a larger type can
+                    be a sign that the result can overflow the type converted from.
+    kind: problem
+    problem.severity: warning
+    security-severity: 8.1
+    precision: high
+    id: cpp/integer-multiplication-cast-to-long
+    tags: |-
+      reliability
+             security
+             correctness
+             types
+             external/cwe/cwe-190
+             external/cwe/cwe-192
+             external/cwe/cwe-197
+             external/cwe/cwe-681
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Arithmetic/SignedOverflowCheck.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Arithmetic/SignedOverflowCheck.bqrs
+  metadata:
+    name: Signed overflow check
+    description: |-
+      Testing for overflow by adding a value to a variable
+                    to see if it "wraps around" works only for
+                    unsigned integer values.
+    kind: problem
+    problem.severity: warning
+    security-severity: 8.1
+    precision: high
+    id: cpp/signed-overflow-check
+    tags: |-
+      correctness
+             security
+             external/cwe/cwe-128
+             external/cwe/cwe-190
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Conversion/CastArrayPointerArithmetic.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Conversion/CastArrayPointerArithmetic.bqrs
+  metadata:
+    name: Upcast array used in pointer arithmetic
+    description: |-
+      An array with elements of a derived struct type is cast to a
+                    pointer to the base type of the struct. If pointer arithmetic or
+                    an array dereference is done on the resulting pointer, it will
+                    use the width of the base type, leading to misaligned reads.
+    kind: path-problem
+    problem.severity: warning
+    security-severity: 9.3
+    precision: high
+    id: cpp/upcast-array-pointer-arithmetic
+    tags: |-
+      correctness
+             reliability
+             security
+             external/cwe/cwe-119
+             external/cwe/cwe-843
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Format/NonConstantFormat.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Format/NonConstantFormat.bqrs
+  metadata:
+    name: Non-constant format string
+    description: |-
+      Passing a value that is not a string literal 'format' string to a printf-like function can lead
+                    to a mismatch between the number of arguments defined by the 'format' and the number
+                    of arguments actually passed to the function. If the format string ultimately stems
+                    from an untrusted source, this can be used for exploits.
+                    This query finds format strings coming from non-literal sources. Note that format strings of
+                    type `const char*` it is still considered non-constant if the value is not coming from a string
+                    literal. For example, for a parameter with type `const char*` of an exported function that is
+                    used as a format string, there is no way to ensure the originating value was a string literal.
+    kind: path-problem
+    problem.severity: recommendation
+    security-severity: 9.3
+    precision: high
+    id: cpp/non-constant-format
+    tags: |-
+      maintainability
+             correctness
+             security
+             external/cwe/cwe-134
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Format/SnprintfOverflow.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Format/SnprintfOverflow.bqrs
+  metadata:
+    name: Potentially overflowing call to snprintf
+    description: Using the return value from snprintf without proper checks can cause
+      overflow.
+    kind: problem
+    problem.severity: warning
+    security-severity: 8.1
+    precision: high
+    id: cpp/overflowing-snprintf
+    tags: |-
+      reliability
+             correctness
+             security
+             external/cwe/cwe-190
+             external/cwe/cwe-253
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Format/WrongNumberOfFormatArguments.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Format/WrongNumberOfFormatArguments.bqrs
+  metadata:
+    name: Too few arguments to formatting function
+    description: |-
+      Calling a printf-like function with too few arguments can be
+                    a source of security issues.
+    kind: problem
+    problem.severity: error
+    security-severity: 5.0
+    precision: high
+    id: cpp/wrong-number-format-arguments
+    tags: |-
+      reliability
+             correctness
+             security
+             external/cwe/cwe-234
+             external/cwe/cwe-685
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Format/WrongTypeFormatArguments.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Format/WrongTypeFormatArguments.bqrs
+  metadata:
+    name: Wrong type of arguments to formatting function
+    description: |-
+      Calling a printf-like function with the wrong type of arguments causes unpredictable
+                    behavior.
+    kind: problem
+    problem.severity: error
+    security-severity: 7.5
+    precision: high
+    id: cpp/wrong-type-format-argument
+    tags: |-
+      reliability
+             correctness
+             security
+             external/cwe/cwe-686
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Likely Typos/IncorrectNotOperatorUsage.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Likely Typos/IncorrectNotOperatorUsage.bqrs
+  metadata:
+    name: Incorrect 'not' operator usage
+    description: |-
+      Usage of a logical-not (!) operator as an operand for a bit-wise operation.
+                    This commonly indicates the usage of an incorrect operator instead of the bit-wise not (~) operator,
+                    also known as ones' complement operator.
+    kind: problem
+    id: cpp/incorrect-not-operator-usage
+    problem.severity: warning
+    security-severity: 7.5
+    precision: medium
+    tags: |-
+      security
+             external/cwe/cwe-480
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Memory Management/AllocaInLoop.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Memory Management/AllocaInLoop.bqrs
+  metadata:
+    name: Call to alloca in a loop
+    description: Using alloca in a loop can lead to a stack overflow
+    kind: problem
+    problem.severity: warning
+    security-severity: 7.5
+    precision: high
+    id: cpp/alloca-in-loop
+    tags: |-
+      reliability
+             correctness
+             security
+             external/cwe/cwe-770
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Memory Management/PointerOverflow.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Memory Management/PointerOverflow.bqrs
+  metadata:
+    name: Pointer overflow check
+    description: |-
+      Adding a value to a pointer to check if it overflows relies
+                    on undefined behavior and may lead to memory corruption.
+    kind: problem
+    problem.severity: error
+    security-severity: 2.1
+    precision: high
+    id: cpp/pointer-overflow-check
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-758
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Memory Management/ReturnStackAllocatedMemory.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Memory Management/ReturnStackAllocatedMemory.bqrs
+  metadata:
+    name: Returning stack-allocated memory
+    description: |-
+      A function returns a pointer to a stack-allocated region of
+                    memory. This memory is deallocated at the end of the function,
+                    which may lead the caller to dereference a dangling pointer.
+    kind: path-problem
+    id: cpp/return-stack-allocated-memory
+    problem.severity: warning
+    security-severity: 9.3
+    precision: high
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-825
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Memory Management/StrncpyFlippedArgs.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Memory Management/StrncpyFlippedArgs.bqrs
+  metadata:
+    name: Possibly wrong buffer size in string copy
+    description: |-
+      Calling 'strncpy' with the size of the source buffer
+                    as the third argument may result in a buffer overflow.
+    kind: problem
+    problem.severity: warning
+    security-severity: 9.3
+    precision: medium
+    id: cpp/bad-strncpy-size
+    tags: |-
+      reliability
+             correctness
+             security
+             external/cwe/cwe-676
+             external/cwe/cwe-119
+             external/cwe/cwe-251
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Memory Management/SuspiciousCallToStrncat.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Memory Management/SuspiciousCallToStrncat.bqrs
+  metadata:
+    name: Potentially unsafe call to strncat
+    description: Calling 'strncat' with an incorrect size argument may result in a
+      buffer overflow.
+    kind: problem
+    problem.severity: warning
+    security-severity: 9.3
+    precision: high
+    id: cpp/unsafe-strncat
+    tags: |-
+      reliability
+             correctness
+             security
+             external/cwe/cwe-788
+             external/cwe/cwe-676
+             external/cwe/cwe-119
+             external/cwe/cwe-251
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Memory Management/SuspiciousSizeof.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Memory Management/SuspiciousSizeof.bqrs
+  metadata:
+    name: Suspicious 'sizeof' use
+    description: |-
+      Taking 'sizeof' of an array parameter is often mistakenly thought
+                    to yield the size of the underlying array, but it always yields
+                    the machine pointer size.
+    kind: problem
+    problem.severity: warning
+    security-severity: 8.8
+    precision: medium
+    id: cpp/suspicious-sizeof
+    tags: |-
+      reliability
+             correctness
+             security
+             external/cwe/cwe-467
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Memory Management/UninitializedLocal.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Memory Management/UninitializedLocal.bqrs
+  metadata:
+    name: Potentially uninitialized local variable
+    description: |-
+      Reading from a local variable that has not been assigned to
+                    will typically yield garbage.
+    kind: path-problem
+    id: cpp/uninitialized-local
+    problem.severity: warning
+    security-severity: 7.8
+    precision: medium
+    tags: |-
+      security
+             external/cwe/cwe-665
+             external/cwe/cwe-457
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Memory Management/UnsafeUseOfStrcat.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Memory Management/UnsafeUseOfStrcat.bqrs
+  metadata:
+    name: Potentially unsafe use of strcat
+    description: |-
+      Using 'strcat' without checking the size of the source string
+                    may result in a buffer overflow
+    kind: problem
+    problem.severity: warning
+    security-severity: 9.8
+    precision: medium
+    id: cpp/unsafe-strcat
+    tags: |-
+      reliability
+             correctness
+             security
+             external/cwe/cwe-676
+             external/cwe/cwe-120
+             external/cwe/cwe-251
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Memory Management/UsingExpiredStackAddress.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Memory Management/UsingExpiredStackAddress.bqrs
+  metadata:
+    name: Use of expired stack-address
+    description: |-
+      Accessing the stack-allocated memory of a function
+                    after it has returned can lead to memory corruption.
+    kind: path-problem
+    problem.severity: error
+    security-severity: 9.3
+    precision: high
+    id: cpp/using-expired-stack-address
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-825
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/OO/UnsafeUseOfThis.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/OO/UnsafeUseOfThis.bqrs
+  metadata:
+    name: Unsafe use of this in constructor
+    description: |-
+      A call to a pure virtual function using a 'this'
+                    pointer of an object that is under construction
+                    may lead to undefined behavior.
+    kind: path-problem
+    id: cpp/unsafe-use-of-this
+    problem.severity: error
+    security-severity: 7.5
+    precision: very-high
+    tags: |-
+      correctness
+             language-features
+             security
+             external/cwe/cwe-670
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Protocols/TlsSettingsMisconfiguration.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Protocols/TlsSettingsMisconfiguration.bqrs
+  metadata:
+    name: boost::asio TLS settings misconfiguration
+    description: "Using the TLS or SSLv23 protocol from the boost::asio library, but\
+      \ not disabling deprecated protocols, or disabling minimum-recommended protocols."
+    kind: problem
+    problem.severity: error
+    precision: medium
+    security-severity: 7.5
+    id: cpp/boost/tls-settings-misconfiguration
+    tags: |-
+      security
+             external/cwe/cwe-326
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Protocols/UseOfDeprecatedHardcodedProtocol.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Protocols/UseOfDeprecatedHardcodedProtocol.bqrs
+  metadata:
+    name: boost::asio use of deprecated hardcoded protocol
+    description: Using a deprecated hard-coded protocol using the boost::asio library.
+    kind: problem
+    problem.severity: error
+    precision: medium
+    security-severity: 7.5
+    id: cpp/boost/use-of-deprecated-hardcoded-security-protocol
+    tags: |-
+      security
+             external/cwe/cwe-327
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/RedundantNullCheckSimple.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/RedundantNullCheckSimple.bqrs
+  metadata:
+    name: Redundant null check due to previous dereference
+    description: |-
+      Checking a pointer for nullness after dereferencing it is
+                    likely to be a sign that either the check can be removed, or
+                    it should be moved before the dereference.
+    kind: path-problem
+    problem.severity: error
+    security-severity: 7.5
+    precision: high
+    id: cpp/redundant-null-check-simple
+    tags: |-
+      reliability
+             correctness
+             security
+             external/cwe/cwe-476
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Underspecified Functions/TooFewArguments.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Underspecified Functions/TooFewArguments.bqrs
+  metadata:
+    name: Call to function with fewer arguments than declared parameters
+    description: |-
+      A function call is passing fewer arguments than the number of
+                    declared parameters of the function. This may indicate
+                    that the code does not follow the author's intent. It is also
+                    a vulnerability, since the function is likely to operate on
+                    undefined data.
+    kind: problem
+    problem.severity: error
+    security-severity: 5.0
+    precision: very-high
+    id: cpp/too-few-arguments
+    tags: |-
+      correctness
+             maintainability
+             security
+             external/cwe/cwe-234
+             external/cwe/cwe-685
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-014/MemsetMayBeDeleted.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-014/MemsetMayBeDeleted.bqrs
+  metadata:
+    name: Call to `memset` may be deleted
+    description: |-
+      Using the `memset` function to clear private data in a variable that has no subsequent use
+                    can make information-leak vulnerabilities easier to exploit because the compiler can remove the call.
+    kind: problem
+    id: cpp/memset-may-be-deleted
+    problem.severity: warning
+    security-severity: 7.8
+    precision: high
+    tags: |-
+      security
+             external/cwe/cwe-014
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-022/TaintedPath.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-022/TaintedPath.bqrs
+  metadata:
+    name: Uncontrolled data used in path expression
+    description: |-
+      Accessing paths influenced by users can allow an
+                    attacker to access unexpected resources.
+    kind: path-problem
+    problem.severity: warning
+    security-severity: 7.5
+    precision: medium
+    id: cpp/path-injection
+    tags: |-
+      security
+             external/cwe/cwe-022
+             external/cwe/cwe-023
+             external/cwe/cwe-036
+             external/cwe/cwe-073
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-078/ExecTainted.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-078/ExecTainted.bqrs
+  metadata:
+    name: Uncontrolled data used in OS command
+    description: |-
+      Using user-supplied data in an OS command, without
+                    neutralizing special elements, can make code vulnerable
+                    to command injection.
+    kind: path-problem
+    problem.severity: error
+    security-severity: 9.8
+    precision: high
+    id: cpp/command-line-injection
+    tags: |-
+      security
+             external/cwe/cwe-078
+             external/cwe/cwe-088
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-079/CgiXss.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-079/CgiXss.bqrs
+  metadata:
+    name: CGI script vulnerable to cross-site scripting
+    description: |-
+      Writing user input directly to a web page
+                    allows for a cross-site scripting vulnerability.
+    kind: path-problem
+    problem.severity: error
+    security-severity: 7.8
+    precision: high
+    id: cpp/cgi-xss
+    tags: |-
+      security
+             external/cwe/cwe-079
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-089/SqlTainted.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-089/SqlTainted.bqrs
+  metadata:
+    name: Uncontrolled data in SQL query
+    description: |-
+      Including user-supplied data in a SQL query without
+                    neutralizing special elements can make code vulnerable
+                    to SQL Injection.
+    kind: path-problem
+    problem.severity: error
+    security-severity: 8.8
+    precision: high
+    id: cpp/sql-injection
+    tags: |-
+      security
+             external/cwe/cwe-089
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-114/UncontrolledProcessOperation.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-114/UncontrolledProcessOperation.bqrs
+  metadata:
+    name: Uncontrolled process operation
+    description: |-
+      Using externally controlled strings in a process
+                    operation can allow an attacker to execute malicious
+                    commands.
+    kind: path-problem
+    problem.severity: warning
+    security-severity: 8.2
+    precision: medium
+    id: cpp/uncontrolled-process-operation
+    tags: |-
+      security
+             external/cwe/cwe-114
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-119/OverflowBuffer.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-119/OverflowBuffer.bqrs
+  metadata:
+    name: Call to memory access function may overflow buffer
+    description: |-
+      Incorrect use of a function that accesses a memory
+                    buffer may read or write data past the end of that
+                    buffer.
+    kind: problem
+    id: cpp/overflow-buffer
+    problem.severity: warning
+    security-severity: 9.3
+    precision: medium
+    tags: |-
+      security
+             external/cwe/cwe-119
+             external/cwe/cwe-121
+             external/cwe/cwe-122
+             external/cwe/cwe-126
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-119/OverrunWriteProductFlow.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-119/OverrunWriteProductFlow.bqrs
+  metadata:
+    name: Overrunning write
+    description: |-
+      Exceeding the size of a static array during write or access operations
+                    may result in a buffer overflow.
+    kind: path-problem
+    problem.severity: error
+    security-severity: 9.3
+    precision: medium
+    id: cpp/overrun-write
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-119
+             external/cwe/cwe-131
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-120/BadlyBoundedWrite.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-120/BadlyBoundedWrite.bqrs
+  metadata:
+    name: Badly bounded write
+    description: |-
+      Buffer write operations with a length parameter that
+                    does not match the size of the destination buffer may
+                    overflow.
+    kind: problem
+    problem.severity: error
+    security-severity: 9.3
+    precision: high
+    id: cpp/badly-bounded-write
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-120
+             external/cwe/cwe-787
+             external/cwe/cwe-805
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-120/OverrunWrite.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-120/OverrunWrite.bqrs
+  metadata:
+    name: Potentially overrunning write
+    description: |-
+      Buffer write operations that do not control the length
+                    of data written may overflow.
+    kind: problem
+    problem.severity: error
+    security-severity: 9.3
+    precision: medium
+    id: cpp/overrunning-write
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-120
+             external/cwe/cwe-787
+             external/cwe/cwe-805
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-120/OverrunWriteFloat.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-120/OverrunWriteFloat.bqrs
+  metadata:
+    name: Potentially overrunning write with float to string conversion
+    description: |-
+      Buffer write operations that do not control the length
+                    of data written may overflow when floating point inputs
+                    take extreme values.
+    kind: problem
+    problem.severity: error
+    security-severity: 9.3
+    precision: medium
+    id: cpp/overrunning-write-with-float
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-120
+             external/cwe/cwe-787
+             external/cwe/cwe-805
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-120/UnboundedWrite.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-120/UnboundedWrite.bqrs
+  metadata:
+    name: Unbounded write
+    description: |-
+      Buffer write operations that do not control the length
+                    of data written may overflow.
+    kind: path-problem
+    problem.severity: error
+    security-severity: 9.3
+    precision: medium
+    id: cpp/unbounded-write
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-120
+             external/cwe/cwe-787
+             external/cwe/cwe-805
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-120/VeryLikelyOverrunWrite.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-120/VeryLikelyOverrunWrite.bqrs
+  metadata:
+    name: Likely overrunning write
+    description: |-
+      Buffer write operations that do not control the length
+                    of data written may overflow
+    kind: problem
+    problem.severity: error
+    security-severity: 9.3
+    precision: high
+    id: cpp/very-likely-overrunning-write
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-120
+             external/cwe/cwe-787
+             external/cwe/cwe-805
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-121/UnterminatedVarargsCall.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-121/UnterminatedVarargsCall.bqrs
+  metadata:
+    name: Unterminated variadic call
+    description: |-
+      Calling a variadic function without a sentinel value
+                    may result in a buffer overflow if the function expects
+                    a specific value to terminate the argument list.
+    kind: problem
+    problem.severity: warning
+    security-severity: 8.8
+    precision: medium
+    id: cpp/unterminated-variadic-call
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-121
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-131/NoSpaceForZeroTerminator.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-131/NoSpaceForZeroTerminator.bqrs
+  metadata:
+    name: No space for zero terminator
+    description: |-
+      Allocating a buffer using 'malloc' without ensuring that
+                    there is always space for the entire string and a zero
+                    terminator can cause a buffer overrun.
+    kind: problem
+    problem.severity: error
+    security-severity: 9.8
+    precision: high
+    id: cpp/no-space-for-terminator
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-131
+             external/cwe/cwe-120
+             external/cwe/cwe-122
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-134/UncontrolledFormatString.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-134/UncontrolledFormatString.bqrs
+  metadata:
+    name: Uncontrolled format string
+    description: |-
+      Using externally-controlled format strings in
+                    printf-style functions can lead to buffer overflows
+                    or data representation problems.
+    kind: path-problem
+    problem.severity: warning
+    security-severity: 9.3
+    precision: high
+    id: cpp/tainted-format-string
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-134
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-190/ArithmeticUncontrolled.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-190/ArithmeticUncontrolled.bqrs
+  metadata:
+    name: Uncontrolled data in arithmetic expression
+    description: |-
+      Arithmetic operations on uncontrolled data that is not
+                    validated can cause overflows.
+    kind: path-problem
+    problem.severity: warning
+    security-severity: 8.6
+    precision: high
+    id: cpp/uncontrolled-arithmetic
+    tags: |-
+      security
+             external/cwe/cwe-190
+             external/cwe/cwe-191
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-190/ComparisonWithWiderType.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-190/ComparisonWithWiderType.bqrs
+  metadata:
+    name: Comparison of narrow type with wide type in loop condition
+    description: |-
+      Comparisons between types of different widths in a loop
+                    condition can cause the loop to behave unexpectedly.
+    id: cpp/comparison-with-wider-type
+    kind: problem
+    problem.severity: warning
+    security-severity: 7.8
+    precision: high
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-190
+             external/cwe/cwe-197
+             external/cwe/cwe-835
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-190/TaintedAllocationSize.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-190/TaintedAllocationSize.bqrs
+  metadata:
+    name: Uncontrolled allocation size
+    description: |-
+      Allocating memory with a size controlled by an external user can result in
+                    arbitrary amounts of memory being allocated.
+    kind: path-problem
+    problem.severity: error
+    security-severity: 8.1
+    precision: medium
+    id: cpp/uncontrolled-allocation-size
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-190
+             external/cwe/cwe-789
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-191/UnsignedDifferenceExpressionComparedZero.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-191/UnsignedDifferenceExpressionComparedZero.bqrs
+  metadata:
+    name: Unsigned difference expression compared to zero
+    description: A subtraction with an unsigned result can never be negative. Using
+      such an expression in a relational comparison with `0` is likely to be wrong.
+    kind: problem
+    id: cpp/unsigned-difference-expression-compared-zero
+    problem.severity: warning
+    security-severity: 9.8
+    precision: high
+    tags: |-
+      security
+             correctness
+             external/cwe/cwe-191
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-193/InvalidPointerDeref.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-193/InvalidPointerDeref.bqrs
+  metadata:
+    name: Invalid pointer dereference
+    description: Dereferencing an out-of-bounds pointer is undefined behavior and
+      may lead to security vulnerabilities.
+    kind: path-problem
+    problem.severity: error
+    security-severity: 9.3
+    precision: medium
+    id: cpp/invalid-pointer-deref
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-119
+             external/cwe/cwe-125
+             external/cwe/cwe-193
+             external/cwe/cwe-787
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-253/HResultBooleanConversion.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-253/HResultBooleanConversion.bqrs
+  metadata:
+    name: Cast between HRESULT and a Boolean type
+    description: Casting an HRESULT to/from a Boolean type and then using it in a
+      test expression will yield an incorrect result because success (S_OK) in HRESULT
+      is indicated by a value of 0.
+    kind: problem
+    id: cpp/hresult-boolean-conversion
+    problem.severity: error
+    security-severity: 7.5
+    precision: high
+    tags: |-
+      security
+             external/cwe/cwe-253
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-290/AuthenticationBypass.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-290/AuthenticationBypass.bqrs
+  metadata:
+    name: Authentication bypass by spoofing
+    description: |-
+      Authentication by checking that the peer's address
+                    matches a known IP or web address is unsafe as it is
+                    vulnerable to spoofing attacks.
+    kind: path-problem
+    problem.severity: warning
+    security-severity: 8.1
+    precision: medium
+    id: cpp/user-controlled-bypass
+    tags: |-
+      security
+             external/cwe/cwe-290
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-295/SSLResultConflation.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-295/SSLResultConflation.bqrs
+  metadata:
+    name: Certificate result conflation
+    description: Only accept SSL certificates that pass certificate verification.
+    kind: problem
+    problem.severity: error
+    security-severity: 7.5
+    precision: medium
+    id: cpp/certificate-result-conflation
+    tags: |-
+      security
+             external/cwe/cwe-295
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-295/SSLResultNotChecked.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-295/SSLResultNotChecked.bqrs
+  metadata:
+    name: Certificate not checked
+    description: Always check the result of certificate verification after fetching
+      an SSL certificate.
+    kind: problem
+    problem.severity: error
+    security-severity: 7.5
+    precision: medium
+    id: cpp/certificate-not-checked
+    tags: |-
+      security
+             external/cwe/cwe-295
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-311/CleartextBufferWrite.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-311/CleartextBufferWrite.bqrs
+  metadata:
+    name: Cleartext storage of sensitive information in buffer
+    description: |-
+      Storing sensitive information in cleartext can expose it
+                    to an attacker.
+    kind: path-problem
+    problem.severity: warning
+    security-severity: 7.5
+    precision: medium
+    id: cpp/cleartext-storage-buffer
+    tags: |-
+      security
+             external/cwe/cwe-312
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-311/CleartextFileWrite.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-311/CleartextFileWrite.bqrs
+  metadata:
+    name: Cleartext storage of sensitive information in file
+    description: |-
+      Storing sensitive information in cleartext can expose it
+                    to an attacker.
+    kind: path-problem
+    problem.severity: warning
+    security-severity: 7.5
+    precision: high
+    id: cpp/cleartext-storage-file
+    tags: |-
+      security
+             external/cwe/cwe-260
+             external/cwe/cwe-313
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-311/CleartextTransmission.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-311/CleartextTransmission.bqrs
+  metadata:
+    name: Cleartext transmission of sensitive information
+    description: |-
+      Transmitting sensitive information across a network in
+                    cleartext can expose it to an attacker.
+    kind: path-problem
+    problem.severity: warning
+    security-severity: 7.5
+    precision: high
+    id: cpp/cleartext-transmission
+    tags: |-
+      security
+             external/cwe/cwe-319
+             external/cwe/cwe-359
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-313/CleartextSqliteDatabase.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-313/CleartextSqliteDatabase.bqrs
+  metadata:
+    name: Cleartext storage of sensitive information in an SQLite database
+    description: |-
+      Storing sensitive information in a non-encrypted
+                    database can expose it to an attacker.
+    kind: path-problem
+    problem.severity: warning
+    security-severity: 7.5
+    precision: medium
+    id: cpp/cleartext-storage-database
+    tags: |-
+      security
+             external/cwe/cwe-313
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-319/UseOfHttp.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-319/UseOfHttp.bqrs
+  metadata:
+    name: Failure to use HTTPS URLs
+    description: Non-HTTPS connections can be intercepted by third parties.
+    kind: path-problem
+    problem.severity: warning
+    security-severity: 8.1
+    precision: high
+    id: cpp/non-https-url
+    tags: |-
+      security
+             external/cwe/cwe-319
+             external/cwe/cwe-345
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-326/InsufficientKeySize.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-326/InsufficientKeySize.bqrs
+  metadata:
+    name: Use of a cryptographic algorithm with insufficient key size
+    description: |-
+      Using cryptographic algorithms with too small a key size can
+                    allow an attacker to compromise security.
+    kind: path-problem
+    problem.severity: error
+    security-severity: 7.5
+    precision: high
+    id: cpp/insufficient-key-size
+    tags: |-
+      security
+             external/cwe/cwe-326
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-327/BrokenCryptoAlgorithm.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-327/BrokenCryptoAlgorithm.bqrs
+  metadata:
+    name: Use of a broken or risky cryptographic algorithm
+    description: |-
+      Using broken or weak cryptographic algorithms can allow
+                    an attacker to compromise security.
+    kind: problem
+    problem.severity: error
+    security-severity: 7.5
+    precision: high
+    id: cpp/weak-cryptographic-algorithm
+    tags: |-
+      security
+             external/cwe/cwe-327
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-327/OpenSslHeartbleed.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-327/OpenSslHeartbleed.bqrs
+  metadata:
+    name: Use of a version of OpenSSL with Heartbleed
+    description: |-
+      Using an old version of OpenSSL can allow remote
+                    attackers to retrieve portions of memory.
+    kind: problem
+    problem.severity: error
+    security-severity: 7.5
+    precision: very-high
+    id: cpp/openssl-heartbleed
+    tags: |-
+      security
+             external/cwe/cwe-327
+             external/cwe/cwe-788
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-367/TOCTOUFilesystemRace.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-367/TOCTOUFilesystemRace.bqrs
+  metadata:
+    name: Time-of-check time-of-use filesystem race condition
+    description: |-
+      Separately checking the state of a file before operating
+                    on it may allow an attacker to modify the file between
+                    the two operations.
+    kind: problem
+    problem.severity: warning
+    security-severity: 7.7
+    precision: high
+    id: cpp/toctou-race-condition
+    tags: |-
+      security
+             external/cwe/cwe-367
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-416/IteratorToExpiredContainer.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-416/IteratorToExpiredContainer.bqrs
+  metadata:
+    name: Iterator to expired container
+    description: Using an iterator owned by a container whose lifetime has expired
+      may lead to unexpected behavior.
+    kind: problem
+    precision: high
+    id: cpp/iterator-to-expired-container
+    problem.severity: warning
+    security-severity: 8.8
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-416
+             external/cwe/cwe-664
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-416/UseOfStringAfterLifetimeEnds.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-416/UseOfStringAfterLifetimeEnds.bqrs
+  metadata:
+    name: Use of string after lifetime ends
+    description: If the value of a call to 'c_str' outlives the underlying object
+      it may lead to unexpected behavior.
+    kind: problem
+    precision: high
+    id: cpp/use-of-string-after-lifetime-ends
+    problem.severity: warning
+    security-severity: 8.8
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-416
+             external/cwe/cwe-664
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-416/UseOfUniquePointerAfterLifetimeEnds.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-416/UseOfUniquePointerAfterLifetimeEnds.bqrs
+  metadata:
+    name: Use of unique pointer after lifetime ends
+    description: Referencing the contents of a unique pointer after the underlying
+      object has expired may lead to unexpected behavior.
+    kind: problem
+    precision: high
+    id: cpp/use-of-unique-pointer-after-lifetime-ends
+    problem.severity: warning
+    security-severity: 8.8
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-416
+             external/cwe/cwe-664
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-428/UnsafeCreateProcessCall.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-428/UnsafeCreateProcessCall.bqrs
+  metadata:
+    name: NULL application name with an unquoted path in call to CreateProcess
+    description: "Calling a function of the CreateProcess* family of functions, where\
+      \ the path contains spaces, introduces a security vulnerability."
+    id: cpp/unsafe-create-process-call
+    kind: problem
+    problem.severity: error
+    security-severity: 7.8
+    precision: medium
+    msrc.severity: important
+    tags: |-
+      security
+             external/cwe/cwe-428
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-468/IncorrectPointerScaling.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-468/IncorrectPointerScaling.bqrs
+  metadata:
+    name: Suspicious pointer scaling
+    description: |-
+      Implicit scaling of pointer arithmetic expressions
+                    can cause buffer overflow conditions.
+    kind: problem
+    problem.severity: warning
+    security-severity: 8.8
+    precision: medium
+    id: cpp/suspicious-pointer-scaling
+    tags: |-
+      security
+             external/cwe/cwe-468
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-468/IncorrectPointerScalingVoid.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-468/IncorrectPointerScalingVoid.bqrs
+  metadata:
+    name: Suspicious pointer scaling to void
+    description: |-
+      Implicit scaling of pointer arithmetic expressions
+                    can cause buffer overflow conditions.
+    kind: problem
+    problem.severity: warning
+    security-severity: 8.8
+    precision: medium
+    id: cpp/suspicious-pointer-scaling-void
+    tags: |-
+      security
+             external/cwe/cwe-468
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-468/SuspiciousAddWithSizeof.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-468/SuspiciousAddWithSizeof.bqrs
+  metadata:
+    name: Suspicious add with sizeof
+    description: |-
+      Explicitly scaled pointer arithmetic expressions
+                    can cause buffer overflow conditions if the offset is also
+                    implicitly scaled.
+    kind: problem
+    problem.severity: warning
+    security-severity: 8.8
+    precision: high
+    id: cpp/suspicious-add-sizeof
+    tags: |-
+      security
+             external/cwe/cwe-468
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-497/ExposedSystemData.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-497/ExposedSystemData.bqrs
+  metadata:
+    name: Exposure of system data to an unauthorized control sphere
+    description: |-
+      Exposing system data or debugging information helps
+                    a malicious user learn about the system and form an
+                    attack plan.
+    kind: path-problem
+    problem.severity: warning
+    security-severity: 6.5
+    precision: high
+    id: cpp/system-data-exposure
+    tags: |-
+      security
+             external/cwe/cwe-497
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-497/PotentiallyExposedSystemData.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-497/PotentiallyExposedSystemData.bqrs
+  metadata:
+    name: Potential exposure of sensitive system data to an unauthorized control sphere
+    description: |-
+      Exposing sensitive system data helps
+                    a malicious user learn about the system and form an
+                    attack plan.
+    kind: path-problem
+    problem.severity: warning
+    security-severity: 6.5
+    precision: medium
+    id: cpp/potential-system-data-exposure
+    tags: |-
+      security
+             external/cwe/cwe-497
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-570/IncorrectAllocationErrorHandling.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-570/IncorrectAllocationErrorHandling.bqrs
+  metadata:
+    name: Incorrect allocation-error handling
+    description: Mixing up the failure conditions of 'operator new' and 'operator
+      new(std::nothrow)' can result in unexpected behavior.
+    kind: problem
+    id: cpp/incorrect-allocation-error-handling
+    problem.severity: warning
+    security-severity: 7.5
+    precision: medium
+    tags: |-
+      correctness
+             security
+             external/cwe/cwe-570
+             external/cwe/cwe-252
+             external/cwe/cwe-755
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-611/XXE.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-611/XXE.bqrs
+  metadata:
+    name: XML external entity expansion
+    description: |-
+      Parsing user-controlled XML documents and allowing expansion of
+                    external entity references may lead to disclosure of
+                    confidential data or denial of service.
+    kind: path-problem
+    id: cpp/external-entity-expansion
+    problem.severity: warning
+    security-severity: 9.1
+    precision: high
+    tags: |-
+      security
+             external/cwe/cwe-611
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-676/DangerousFunctionOverflow.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-676/DangerousFunctionOverflow.bqrs
+  metadata:
+    name: Use of dangerous function
+    description: Use of a standard library function that does not guard against buffer
+      overflow.
+    kind: problem
+    problem.severity: error
+    security-severity: 10.0
+    precision: very-high
+    id: cpp/dangerous-function-overflow
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-242
+             external/cwe/cwe-676
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-676/DangerousUseOfCin.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-676/DangerousUseOfCin.bqrs
+  metadata:
+    name: Dangerous use of 'cin'
+    description: |-
+      Using `cin` without specifying the length of the input
+                    may be dangerous.
+    kind: problem
+    problem.severity: error
+    security-severity: 10.0
+    precision: high
+    id: cpp/dangerous-cin
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-676
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-676/PotentiallyDangerousFunction.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-676/PotentiallyDangerousFunction.bqrs
+  metadata:
+    name: Use of potentially dangerous function
+    description: Use of a standard library function that is not thread-safe.
+    kind: problem
+    problem.severity: warning
+    security-severity: 10.0
+    precision: medium
+    id: cpp/potentially-dangerous-function
+    tags: |-
+      reliability
+             security
+             external/cwe/cwe-676
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-704/WcharCharConversion.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-704/WcharCharConversion.bqrs
+  metadata:
+    name: Cast from char* to wchar_t*
+    description: |-
+      Casting a byte string to a wide-character string is likely
+                    to yield a string that is incorrectly terminated or aligned.
+                    This can lead to undefined behavior, including buffer overruns.
+    kind: problem
+    id: cpp/incorrect-string-type-conversion
+    problem.severity: error
+    security-severity: 8.8
+    precision: high
+    tags: |-
+      security
+             external/cwe/cwe-704
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-732/DoNotCreateWorldWritable.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-732/DoNotCreateWorldWritable.bqrs
+  metadata:
+    name: File created without restricting permissions
+    description: Creating a file that is world-writable can allow an attacker to write
+      to the file.
+    kind: problem
+    problem.severity: warning
+    security-severity: 7.8
+    precision: medium
+    id: cpp/world-writable-file-creation
+    tags: |-
+      security
+             external/cwe/cwe-732
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-732/OpenCallMissingModeArgument.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-732/OpenCallMissingModeArgument.bqrs
+  metadata:
+    name: File opened with O_CREAT flag but without mode argument
+    description: Opening a file with the O_CREAT flag but without mode argument reads
+      arbitrary bytes from the stack.
+    kind: problem
+    problem.severity: error
+    security-severity: 7.8
+    precision: high
+    id: cpp/open-call-with-mode-argument
+    tags: |-
+      security
+             external/cwe/cwe-732
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-732/UnsafeDaclSecurityDescriptor.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-732/UnsafeDaclSecurityDescriptor.bqrs
+  metadata:
+    name: Setting a DACL to NULL in a SECURITY_DESCRIPTOR
+    description: |-
+      Setting a DACL to NULL in a SECURITY_DESCRIPTOR will result in an unprotected object.
+                    If the DACL that belongs to the security descriptor of an object is set to NULL, a null DACL is created.
+                    A null DACL grants full access to any user who requests it;
+                    normal security checking is not performed with respect to the object.
+    id: cpp/unsafe-dacl-security-descriptor
+    kind: problem
+    problem.severity: error
+    security-severity: 7.8
+    precision: high
+    tags: |-
+      security
+             external/cwe/cwe-732
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-807/TaintedCondition.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-807/TaintedCondition.bqrs
+  metadata:
+    name: Untrusted input for a condition
+    description: |-
+      Using untrusted inputs in a statement that makes a
+                    security decision makes code vulnerable to
+                    attack.
+    kind: path-problem
+    problem.severity: warning
+    security-severity: 7.5
+    precision: medium
+    id: cpp/tainted-permissions-check
+    tags: |-
+      security
+             external/cwe/cwe-807
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Security/CWE/CWE-843/TypeConfusion.ql
+  relativeBqrsPath: codeql/cpp-queries/Security/CWE/CWE-843/TypeConfusion.bqrs
+  metadata:
+    name: Type confusion
+    description: Casting a value to an incompatible type can lead to undefined behavior.
+    kind: path-problem
+    problem.severity: warning
+    security-severity: 9.3
+    precision: medium
+    id: cpp/type-confusion
+    tags: |-
+      security
+             external/cwe/cwe-843
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Summary/LinesOfCode.ql
+  relativeBqrsPath: codeql/cpp-queries/Summary/LinesOfCode.bqrs
+  metadata:
+    id: cpp/summary/lines-of-code
+    name: Total lines of C/C++ code in the database
+    description: "The total number of lines of C/C++ code across all files, including\
+      \ system headers, libraries, and auto-generated files. This is a useful metric\
+      \ of the size of a database. For all files that were seen during the build,\
+      \ this query counts the lines of code, excluding whitespace or comments."
+    kind: metric
+    tags: |-
+      summary
+             telemetry
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Summary/LinesOfUserCode.ql
+  relativeBqrsPath: codeql/cpp-queries/Summary/LinesOfUserCode.bqrs
+  metadata:
+    name: Total lines of user written C/C++ code in the database
+    description: "The total number of lines of C/C++ code from the source code directory,\
+      \ excluding auto-generated files. This query counts the lines of code, excluding\
+      \ whitespace or comments. Note: If external libraries are included in the codebase\
+      \ either in a checked-in virtual environment or as vendored code, that will\
+      \ currently be counted as user written code."
+    kind: metric
+    tags: |-
+      summary
+             lines-of-code
+             debug
+    id: cpp/summary/lines-of-user-code
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Telemetry/CompilerErrors.ql
+  relativeBqrsPath: codeql/cpp-queries/Telemetry/CompilerErrors.bqrs
+  metadata:
+    name: Compiler errors
+    description: "A count of all compiler errors, grouped by error text."
+    kind: metric
+    tags: summary telemetry
+    id: cpp/telemetry/compiler-errors
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Telemetry/DatabaseQuality.ql
+  relativeBqrsPath: codeql/cpp-queries/Telemetry/DatabaseQuality.bqrs
+  metadata:
+    name: Database quality
+    description: Metrics that indicate the quality of the database.
+    kind: metric
+    tags: summary telemetry
+    id: cpp/telemetry/database-quality
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Telemetry/ExtractionMetrics.ql
+  relativeBqrsPath: codeql/cpp-queries/Telemetry/ExtractionMetrics.bqrs
+  metadata:
+    name: Extraction metrics
+    description: Raw metrics relating to extraction.
+    kind: metric
+    tags: summary telemetry
+    id: cpp/telemetry/extraction-metrics
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Telemetry/ExtractorInformation.ql
+  relativeBqrsPath: codeql/cpp-queries/Telemetry/ExtractorInformation.bqrs
+  metadata:
+    name: C/C++ extraction information
+    description: Information about the extraction for a C/C++ database
+    kind: metric
+    tags: summary telemetry
+    id: cpp/telemetry/extraction-information
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Telemetry/MissingIncludes.ql
+  relativeBqrsPath: codeql/cpp-queries/Telemetry/MissingIncludes.bqrs
+  metadata:
+    name: Failed to include header file
+    description: "A count of all failed includes, grouped by filename."
+    kind: metric
+    tags: summary telemetry
+    id: cpp/telemetry/failed-includes
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Telemetry/SucceededIncludes.ql
+  relativeBqrsPath: codeql/cpp-queries/Telemetry/SucceededIncludes.bqrs
+  metadata:
+    name: Successfully included header files
+    description: "A count of all succeeded includes, grouped by filename."
+    kind: metric
+    tags: summary telemetry
+    id: cpp/telemetry/succeeded-includes
+extensionPacks: []
+packs:
+  codeql/cpp-all#0:
+    name: codeql/cpp-all
+    version: 10.0.1-dev
+    isLibrary: true
+    isExtensionPack: false
+    localPath: file:///F:/qltool/codeql-main/cpp/ql/lib/
+    localPackDefinitionFile: file:///F:/qltool/codeql-main/cpp/ql/lib/qlpack.yml
+    runDataExtensions: []
+  codeql/util#2:
+    name: codeql/util
+    version: 2.0.36-dev
+    isLibrary: true
+    isExtensionPack: false
+    localPath: file:///F:/qltool/codeql-main/shared/util/
+    localPackDefinitionFile: file:///F:/qltool/codeql-main/shared/util/qlpack.yml
+    runDataExtensions: []
+  codeql/cpp-queries#1:
+    name: codeql/cpp-queries
+    version: 1.6.2-dev
+    isLibrary: false
+    isExtensionPack: false
+    localPath: file:///F:/qltool/codeql-main/cpp/ql/src/
+    localPackDefinitionFile: file:///F:/qltool/codeql-main/cpp/ql/src/qlpack.yml
+    runDataExtensions:
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/Boost.Asio.model.yml
+      index: 0
+      firstRowId: 0
+      rowCount: 6
+      locations:
+        lineNumbers: A=7+1*5
+        columnNumbers: A=9*6
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/Boost.Asio.model.yml
+      index: 1
+      firstRowId: 6
+      rowCount: 4
+      locations:
+        lineNumbers: A=17+1*3
+        columnNumbers: A=9*4
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/Boost.Asio.model.yml
+      index: 2
+      firstRowId: 10
+      rowCount: 1
+      locations:
+        lineNumbers: A=25
+        columnNumbers: A=9
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CA2CAEX.model.yml
+      index: 0
+      firstRowId: 11
+      rowCount: 13
+      locations:
+        lineNumbers: A=6+1*12
+        columnNumbers: A=9*13
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CAtlArray.model.yml
+      index: 0
+      firstRowId: 24
+      rowCount: 10
+      locations:
+        lineNumbers: A=6+1*9
+        columnNumbers: A=9*10
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CAtlFile.model.yml
+      index: 0
+      firstRowId: 34
+      rowCount: 4
+      locations:
+        lineNumbers: A=6+1*3
+        columnNumbers: A=9*4
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CAtlFileMappingBase.model.yml
+      index: 0
+      firstRowId: 38
+      rowCount: 9
+      locations:
+        lineNumbers: A=6+1*8
+        columnNumbers: A=9*9
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CAtlList.model.yml
+      index: 0
+      firstRowId: 47
+      rowCount: 10
+      locations:
+        lineNumbers: A=6+1*9
+        columnNumbers: A=9*10
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CAtlTemporaryFile.model.yml
+      index: 0
+      firstRowId: 57
+      rowCount: 3
+      locations:
+        lineNumbers: A=6+1*2
+        columnNumbers: A=9*3
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CComBSTR.model.yml
+      index: 0
+      firstRowId: 60
+      rowCount: 28
+      locations:
+        lineNumbers: A=6+1*27
+        columnNumbers: A=9*28
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CComSafeArray.model.yml
+      index: 0
+      firstRowId: 88
+      rowCount: 21
+      locations:
+        lineNumbers: A=6+1*20
+        columnNumbers: A=9*21
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CPathT.model.yml
+      index: 0
+      firstRowId: 109
+      rowCount: 15
+      locations:
+        lineNumbers: A=6+1*10+4+1*3
+        columnNumbers: A=9*15
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CRegKey.model.yml
+      index: 0
+      firstRowId: 124
+      rowCount: 15
+      locations:
+        lineNumbers: A=6+1*14
+        columnNumbers: A=9*15
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CSimpleArray.model.yml
+      index: 0
+      firstRowId: 139
+      rowCount: 7
+      locations:
+        lineNumbers: A=6+1*6
+        columnNumbers: A=9*7
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CSimpleMap.model.yml
+      index: 0
+      firstRowId: 146
+      rowCount: 8
+      locations:
+        lineNumbers: A=6+1*7
+        columnNumbers: A=9*8
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CSimpleStringT.model.yml
+      index: 0
+      firstRowId: 154
+      rowCount: 37
+      locations:
+        lineNumbers: A=6+1*36
+        columnNumbers: A=9*37
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CStrBufT.model.yml
+      index: 0
+      firstRowId: 191
+      rowCount: 3
+      locations:
+        lineNumbers: A=6+1*2
+        columnNumbers: A=9*3
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CStringData.model.yml
+      index: 0
+      firstRowId: 194
+      rowCount: 1
+      locations:
+        lineNumbers: A=6
+        columnNumbers: A=9
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CStringT.model.yml
+      index: 0
+      firstRowId: 195
+      rowCount: 113
+      locations:
+        lineNumbers: A=6+1*112
+        columnNumbers: A=9*113
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CUrl.model.yml
+      index: 0
+      firstRowId: 308
+      rowCount: 17
+      locations:
+        lineNumbers: A=6+1*16
+        columnNumbers: A=9*17
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/ComPtr.model.yml
+      index: 0
+      firstRowId: 325
+      rowCount: 26
+      locations:
+        lineNumbers: A=6+1*25
+        columnNumbers: A=9*26
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/ComPtrRef.model.yml
+      index: 0
+      firstRowId: 351
+      rowCount: 5
+      locations:
+        lineNumbers: A=6+1+2*2+1
+        columnNumbers: A=9*5
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/MySql.model.yml
+      index: 0
+      firstRowId: 356
+      rowCount: 2
+      locations:
+        lineNumbers: A=7+1
+        columnNumbers: A=9*2
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/MySql.model.yml
+      index: 1
+      firstRowId: 358
+      rowCount: 2
+      locations:
+        lineNumbers: A=13+1
+        columnNumbers: A=9*2
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/Oracle.oci.model.yml
+      index: 0
+      firstRowId: 360
+      rowCount: 2
+      locations:
+        lineNumbers: A=7+1
+        columnNumbers: A=9*2
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/Strsafe.model.yml
+      index: 0
+      firstRowId: 362
+      rowCount: 8
+      locations:
+        lineNumbers: A=8+1+2+1+2+1+2+1
+        columnNumbers: A=9*8
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/Strsafe.model.yml
+      index: 1
+      firstRowId: 370
+      rowCount: 48
+      locations:
+        lineNumbers: A=24+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1
+        columnNumbers: A=9*48
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/Windows.model.yml
+      index: 0
+      firstRowId: 418
+      rowCount: 25
+      locations:
+        lineNumbers: A=8+1*5+2+1+2+1*6+2*2+1*8
+        columnNumbers: A=9*25
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/Windows.model.yml
+      index: 1
+      firstRowId: 443
+      rowCount: 15
+      locations:
+        lineNumbers: A=42+1+2*2+1*2+2+1*6+2*2
+        columnNumbers: A=9*15
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/ZMQ.model.yml
+      index: 0
+      firstRowId: 458
+      rowCount: 3
+      locations:
+        lineNumbers: A=7+1*2
+        columnNumbers: A=9*3
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/ZMQ.model.yml
+      index: 1
+      firstRowId: 461
+      rowCount: 3
+      locations:
+        lineNumbers: A=14+1*2
+        columnNumbers: A=9*3
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/ZMQ.model.yml
+      index: 2
+      firstRowId: 464
+      rowCount: 2
+      locations:
+        lineNumbers: A=21+1
+        columnNumbers: A=9*2
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/allocation/Bsd.allocation.model.yml
+      index: 0
+      firstRowId: 466
+      rowCount: 2
+      locations:
+        lineNumbers: A=6+1
+        columnNumbers: A=9*2
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/allocation/Glibc.allocation.model.yml
+      index: 0
+      firstRowId: 468
+      rowCount: 2
+      locations:
+        lineNumbers: A=6+1
+        columnNumbers: A=9*2
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/allocation/OpenSSL.allocation.model.yml
+      index: 0
+      firstRowId: 470
+      rowCount: 4
+      locations:
+        lineNumbers: A=6+1*3
+        columnNumbers: A=9*4
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/allocation/Std.allocation.model.yml
+      index: 0
+      firstRowId: 474
+      rowCount: 13
+      locations:
+        lineNumbers: A=6+1*12
+        columnNumbers: A=9*13
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/allocation/Windows.allocation.model.yml
+      index: 0
+      firstRowId: 487
+      rowCount: 24
+      locations:
+        lineNumbers: A=6+1*23
+        columnNumbers: A=9*24
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/azure.core.model.yml
+      index: 0
+      firstRowId: 511
+      rowCount: 6
+      locations:
+        lineNumbers: A=6+1*5
+        columnNumbers: A=9*6
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/azure.core.model.yml
+      index: 1
+      firstRowId: 517
+      rowCount: 25
+      locations:
+        lineNumbers: A=17+1*24
+        columnNumbers: A=9*25
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/bsl.array.model.yml
+      index: 0
+      firstRowId: 542
+      rowCount: 9
+      locations:
+        lineNumbers: A=6+1*8
+        columnNumbers: A=9*9
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/bsl.deque.model.yml
+      index: 0
+      firstRowId: 551
+      rowCount: 69
+      locations:
+        lineNumbers: A=6+1*68
+        columnNumbers: A=9*69
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/bsl.forward_list.model.yml
+      index: 0
+      firstRowId: 620
+      rowCount: 52
+      locations:
+        lineNumbers: A=6+1*51
+        columnNumbers: A=9*52
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/bsl.list.model.yml
+      index: 0
+      firstRowId: 672
+      rowCount: 67
+      locations:
+        lineNumbers: A=6+1*66
+        columnNumbers: A=9*67
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/bsl.vector.model.yml
+      index: 0
+      firstRowId: 739
+      rowCount: 56
+      locations:
+        lineNumbers: A=6+1*55
+        columnNumbers: A=9*56
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/cctype.model.yml
+      index: 0
+      firstRowId: 795
+      rowCount: 4
+      locations:
+        lineNumbers: A=6+1*3
+        columnNumbers: A=9*4
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/deallocation/Bsd.deallocation.model.yml
+      index: 0
+      firstRowId: 799
+      rowCount: 3
+      locations:
+        lineNumbers: A=6+1*2
+        columnNumbers: A=9*3
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/deallocation/Std.deallocation.model.yml
+      index: 0
+      firstRowId: 802
+      rowCount: 37
+      locations:
+        lineNumbers: A=6+1*36
+        columnNumbers: A=9*37
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/deallocation/Windows.deallocation.model.yml
+      index: 0
+      firstRowId: 839
+      rowCount: 36
+      locations:
+        lineNumbers: A=6+1*35
+        columnNumbers: A=9*36
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/generated/modelgenerator/brotli/brotli.model.yml
+      index: 0
+      firstRowId: 875
+      rowCount: 474
+      locations:
+        lineNumbers: A=7+1*473
+        columnNumbers: A=9*474
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/generated/modelgenerator/curl/curl.model.yml
+      index: 0
+      firstRowId: 1349
+      rowCount: 953
+      locations:
+        lineNumbers: A=7+1*952
+        columnNumbers: A=9*953
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/generated/modelgenerator/glibc/glibc.model.yml
+      index: 0
+      firstRowId: 2302
+      rowCount: 5488
+      locations:
+        lineNumbers: A=7+1*5487
+        columnNumbers: A=9*5488
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/generated/modelgenerator/libidn2/libidn2.model.yml
+      index: 0
+      firstRowId: 7790
+      rowCount: 142
+      locations:
+        lineNumbers: A=7+1*141
+        columnNumbers: A=9*142
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/generated/modelgenerator/libssh2/libssh2.model.yml
+      index: 0
+      firstRowId: 7932
+      rowCount: 511
+      locations:
+        lineNumbers: A=7+1*510
+        columnNumbers: A=9*511
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/generated/modelgenerator/libuv/libuv.model.yml
+      index: 0
+      firstRowId: 8443
+      rowCount: 640
+      locations:
+        lineNumbers: A=7+1*639
+        columnNumbers: A=9*640
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/generated/modelgenerator/nghttp2/nghttp2.model.yml
+      index: 0
+      firstRowId: 9083
+      rowCount: 565
+      locations:
+        lineNumbers: A=7+1*564
+        columnNumbers: A=9*565
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/generated/modelgenerator/openssl/openssl.model.yml
+      index: 0
+      firstRowId: 9648
+      rowCount: 21578
+      locations:
+        lineNumbers: A=7+1*21577
+        columnNumbers: A=9*21578
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/generated/modelgenerator/sqlite/sqlite.model.yml
+      index: 0
+      firstRowId: 31226
+      rowCount: 942
+      locations:
+        lineNumbers: A=7+1*941
+        columnNumbers: A=9*942
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/generated/modelgenerator/zlib/zlib.model.yml
+      index: 0
+      firstRowId: 32168
+      rowCount: 162
+      locations:
+        lineNumbers: A=7+1*161
+        columnNumbers: A=9*162
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/getc.model.yml
+      index: 0
+      firstRowId: 32330
+      rowCount: 13
+      locations:
+        lineNumbers: A=7+1*12
+        columnNumbers: A=9*13
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/iconv.model.yml
+      index: 0
+      firstRowId: 32343
+      rowCount: 1
+      locations:
+        lineNumbers: A=6
+        columnNumbers: A=9
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/oleauto.model.yml
+      index: 0
+      firstRowId: 32344
+      rowCount: 3
+      locations:
+        lineNumbers: A=6+1*2
+        columnNumbers: A=9*3
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/pthread.model.yml
+      index: 0
+      firstRowId: 32347
+      rowCount: 1
+      locations:
+        lineNumbers: A=6
+        columnNumbers: A=9
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/std.array.model.yml
+      index: 0
+      firstRowId: 32348
+      rowCount: 9
+      locations:
+        lineNumbers: A=6+1*8
+        columnNumbers: A=9*9
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/std.deque.model.yml
+      index: 0
+      firstRowId: 32357
+      rowCount: 69
+      locations:
+        lineNumbers: A=6+1*68
+        columnNumbers: A=9*69
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/std.format.model.yml
+      index: 0
+      firstRowId: 32426
+      rowCount: 9
+      locations:
+        lineNumbers: A=6+1*8
+        columnNumbers: A=9*9
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/std.forward_list.model.yml
+      index: 0
+      firstRowId: 32435
+      rowCount: 52
+      locations:
+        lineNumbers: A=6+1*51
+        columnNumbers: A=9*52
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/std.iterator.model.yml
+      index: 0
+      firstRowId: 32487
+      rowCount: 6
+      locations:
+        lineNumbers: A=6+1*5
+        columnNumbers: A=9*6
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/std.list.model.yml
+      index: 0
+      firstRowId: 32493
+      rowCount: 67
+      locations:
+        lineNumbers: A=6+1*66
+        columnNumbers: A=9*67
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/std.thread.model.yml
+      index: 0
+      firstRowId: 32560
+      rowCount: 5
+      locations:
+        lineNumbers: A=6+1*4
+        columnNumbers: A=9*5
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/std.vector.model.yml
+      index: 0
+      firstRowId: 32565
+      rowCount: 56
+      locations:
+        lineNumbers: A=6+1*55
+        columnNumbers: A=9*56

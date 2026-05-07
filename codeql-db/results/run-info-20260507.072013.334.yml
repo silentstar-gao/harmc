@@ -1,0 +1,2069 @@
+---
+queries:
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Best Practices/BlockWithTooManyStatements.ql
+  relativeBqrsPath: codeql/cpp-queries/Best Practices/BlockWithTooManyStatements.bqrs
+  metadata:
+    name: Block with too many statements
+    description: "Blocks with too many consecutive statements are candidates for refactoring.\
+      \ Only complex statements are counted here (eg. for, while, switch ...). The\
+      \ top-level logic will be clearer if each complex statement is extracted to\
+      \ a function."
+    kind: problem
+    problem.severity: recommendation
+    precision: high
+    id: cpp/complex-block
+    tags: |-
+      testability
+             readability
+             maintainability
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Best Practices/ComplexCondition.ql
+  relativeBqrsPath: codeql/cpp-queries/Best Practices/ComplexCondition.bqrs
+  metadata:
+    name: Complex condition
+    description: Boolean expressions that are too deeply nested are hard to read and
+      understand. Consider naming intermediate results as local variables.
+    kind: problem
+    problem.severity: recommendation
+    precision: high
+    id: cpp/complex-condition
+    tags: |-
+      testability
+             readability
+             maintainability
+             statistical
+             non-attributable
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Best Practices/Exceptions/AccidentalRethrow.ql
+  relativeBqrsPath: codeql/cpp-queries/Best Practices/Exceptions/AccidentalRethrow.bqrs
+  metadata:
+    name: Accidental rethrow
+    description: "When there is nothing to rethrow, attempting to rethrow an exception\
+      \ will terminate the program."
+    kind: problem
+    problem.severity: warning
+    precision: high
+    id: cpp/rethrow-no-exception
+    tags: |-
+      reliability
+             correctness
+             exceptions
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Best Practices/Exceptions/CatchingByValue.ql
+  relativeBqrsPath: codeql/cpp-queries/Best Practices/Exceptions/CatchingByValue.bqrs
+  metadata:
+    name: Catching by value
+    description: "Catching an exception by value will create a copy of the thrown\
+      \ exception, thereby potentially slicing the original exception object."
+    kind: problem
+    problem.severity: warning
+    precision: very-high
+    id: cpp/catch-by-value
+    tags: |-
+      efficiency
+             correctness
+             exceptions
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Best Practices/Exceptions/LeakyCatch.ql
+  relativeBqrsPath: codeql/cpp-queries/Best Practices/Exceptions/LeakyCatch.bqrs
+  metadata:
+    name: Leaky catch
+    description: "If an exception is allocated on the heap, then it should be deleted\
+      \ when caught."
+    kind: problem
+    problem.severity: warning
+    precision: high
+    id: cpp/catch-missing-free
+    tags: |-
+      efficiency
+             correctness
+             exceptions
+             external/cwe/cwe-401
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Best Practices/Exceptions/ThrowingPointers.ql
+  relativeBqrsPath: codeql/cpp-queries/Best Practices/Exceptions/ThrowingPointers.bqrs
+  metadata:
+    name: Throwing pointers
+    description: Exceptions should be objects rather than pointers to objects.
+    kind: problem
+    problem.severity: warning
+    precision: high
+    id: cpp/throwing-pointer
+    tags: |-
+      efficiency
+             correctness
+             exceptions
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Best Practices/GuardedFree.ql
+  relativeBqrsPath: codeql/cpp-queries/Best Practices/GuardedFree.bqrs
+  metadata:
+    name: Guarded Free
+    description: |-
+      NULL-condition guards before function calls to the memory-deallocation
+                    function free(3) are unnecessary, because passing NULL to free(3) is a no-op.
+    kind: problem
+    problem.severity: recommendation
+    precision: very-high
+    id: cpp/guarded-free
+    tags: |-
+      maintainability
+             readability
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Best Practices/Hiding/DeclarationHidesParameter.ql
+  relativeBqrsPath: codeql/cpp-queries/Best Practices/Hiding/DeclarationHidesParameter.bqrs
+  metadata:
+    name: Declaration hides parameter
+    description: A local variable hides a parameter. This may be confusing. Consider
+      renaming one of them.
+    kind: problem
+    problem.severity: recommendation
+    precision: very-high
+    id: cpp/declaration-hides-parameter
+    tags: |-
+      maintainability
+             readability
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Best Practices/Hiding/DeclarationHidesVariable.ql
+  relativeBqrsPath: codeql/cpp-queries/Best Practices/Hiding/DeclarationHidesVariable.bqrs
+  metadata:
+    name: Declaration hides variable
+    description: A local variable hides another local variable from a surrounding
+      scope. This may be confusing. Consider renaming one of the variables.
+    kind: problem
+    problem.severity: recommendation
+    precision: high
+    id: cpp/declaration-hides-variable
+    tags: |-
+      maintainability
+             readability
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Best Practices/Hiding/LocalVariableHidesGlobalVariable.ql
+  relativeBqrsPath: codeql/cpp-queries/Best Practices/Hiding/LocalVariableHidesGlobalVariable.bqrs
+  metadata:
+    name: Local variable hides global variable
+    description: A local variable or parameter that hides a global variable of the
+      same name. This may be confusing. Consider renaming one of the variables.
+    kind: problem
+    problem.severity: recommendation
+    precision: very-high
+    id: cpp/local-variable-hides-global-variable
+    tags: |-
+      maintainability
+             readability
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Best Practices/Likely Errors/EmptyBlock.ql
+  relativeBqrsPath: codeql/cpp-queries/Best Practices/Likely Errors/EmptyBlock.bqrs
+  metadata:
+    name: Empty branch of conditional
+    description: |-
+      An empty block after a conditional can be a sign of an omission
+                    and can decrease maintainability of the code. Such blocks
+                    should contain an explanatory comment to aid future
+                    maintainers.
+    kind: problem
+    problem.severity: recommendation
+    precision: very-high
+    id: cpp/empty-block
+    tags: |-
+      reliability
+             readability
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Best Practices/Likely Errors/Slicing.ql
+  relativeBqrsPath: codeql/cpp-queries/Best Practices/Likely Errors/Slicing.bqrs
+  metadata:
+    name: Slicing
+    description: "Assigning a non-reference instance of a derived type to a variable\
+      \ of the base type slices off all members added by the derived class, and can\
+      \ cause an unexpected state."
+    kind: problem
+    problem.severity: warning
+    precision: high
+    id: cpp/slicing
+    tags: |-
+      reliability
+             correctness
+             types
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Best Practices/RuleOfTwo.ql
+  relativeBqrsPath: codeql/cpp-queries/Best Practices/RuleOfTwo.bqrs
+  metadata:
+    name: Inconsistent definition of copy constructor and assignment ('Rule of Two')
+    description: |-
+      Classes that have an explicit copy constructor or copy
+                    assignment operator may behave inconsistently if they do
+                    not have both.
+    kind: problem
+    problem.severity: warning
+    precision: high
+    id: cpp/rule-of-two
+    tags: |-
+      reliability
+             readability
+             language-features
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Best Practices/SloppyGlobal.ql
+  relativeBqrsPath: codeql/cpp-queries/Best Practices/SloppyGlobal.bqrs
+  metadata:
+    name: Short global name
+    description: "Global variables should have descriptive names, to help document\
+      \ their use, avoid namespace pollution and reduce the risk of shadowing with\
+      \ local variables."
+    kind: problem
+    problem.severity: recommendation
+    precision: very-high
+    id: cpp/short-global-name
+    tags: maintainability
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Best Practices/SwitchLongCase.ql
+  relativeBqrsPath: codeql/cpp-queries/Best Practices/SwitchLongCase.bqrs
+  metadata:
+    name: Long switch case
+    description: A switch statement with too much code in its cases can make the control
+      flow hard to follow. Consider wrapping the code for each case in a function
+      and just using the switch statement to invoke the appropriate function in each
+      case.
+    kind: problem
+    problem.severity: recommendation
+    precision: high
+    id: cpp/long-switch
+    tags: |-
+      maintainability
+             readability
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Best Practices/Unused Entities/UnusedLocals.ql
+  relativeBqrsPath: codeql/cpp-queries/Best Practices/Unused Entities/UnusedLocals.bqrs
+  metadata:
+    name: Unused local variable
+    description: |-
+      A local variable that is never called or accessed may be an
+                    indication that the code is incomplete or has a typo.
+    kind: problem
+    problem.severity: recommendation
+    precision: high
+    id: cpp/unused-local-variable
+    tags: |-
+      maintainability
+             useless-code
+             external/cwe/cwe-563
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Best Practices/Unused Entities/UnusedStaticFunctions.ql
+  relativeBqrsPath: codeql/cpp-queries/Best Practices/Unused Entities/UnusedStaticFunctions.bqrs
+  metadata:
+    name: Unused static function
+    description: |-
+      A static function that is never called or accessed may be an
+                    indication that the code is incomplete or has a typo.
+    kind: problem
+    problem.severity: recommendation
+    precision: high
+    id: cpp/unused-static-function
+    tags: |-
+      efficiency
+             useless-code
+             external/cwe/cwe-561
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Best Practices/Unused Entities/UnusedStaticVariables.ql
+  relativeBqrsPath: codeql/cpp-queries/Best Practices/Unused Entities/UnusedStaticVariables.bqrs
+  metadata:
+    name: Unused static variable
+    description: |-
+      A static variable that is never accessed may be an indication
+                    that the code is incomplete or has a typo.
+    kind: problem
+    problem.severity: recommendation
+    precision: high
+    id: cpp/unused-static-variable
+    tags: |-
+      efficiency
+             useless-code
+             external/cwe/cwe-563
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Best Practices/UseOfGoto.ql
+  relativeBqrsPath: codeql/cpp-queries/Best Practices/UseOfGoto.bqrs
+  metadata:
+    name: Use of goto
+    description: |-
+      The goto statement can make the control flow of a function hard
+                    to understand, when used for purposes other than error handling.
+    kind: problem
+    problem.severity: warning
+    precision: high
+    id: cpp/use-of-goto
+    tags: |-
+      maintainability
+             readability
+             language-features
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Critical/DeadCodeGoto.ql
+  relativeBqrsPath: codeql/cpp-queries/Critical/DeadCodeGoto.bqrs
+  metadata:
+    name: Dead code due to goto or break statement
+    description: A goto or break statement is followed by unreachable code.
+    kind: problem
+    problem.severity: warning
+    precision: high
+    id: cpp/dead-code-goto
+    tags: |-
+      maintainability
+             external/cwe/cwe-561
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Critical/LargeParameter.ql
+  relativeBqrsPath: codeql/cpp-queries/Critical/LargeParameter.bqrs
+  metadata:
+    name: Large object passed by value
+    description: "An object larger than 64 bytes is passed by value to a function.\
+      \ Passing large objects by value unnecessarily use up scarce stack space, increase\
+      \ the cost of calling a function and can be a security risk. Use a const pointer\
+      \ to the object instead."
+    kind: problem
+    problem.severity: recommendation
+    precision: very-high
+    id: cpp/large-parameter
+    tags: |-
+      efficiency
+             readability
+             statistical
+             non-attributable
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Critical/NewArrayDeleteMismatch.ql
+  relativeBqrsPath: codeql/cpp-queries/Critical/NewArrayDeleteMismatch.bqrs
+  metadata:
+    name: "'new[]' array freed with 'delete'"
+    description: "An array allocated with 'new[]' is being freed using 'delete'. Behavior\
+      \ in such cases is undefined and should be avoided. Use 'delete[]' when freeing\
+      \ arrays allocated with 'new[]'."
+    kind: problem
+    problem.severity: warning
+    precision: high
+    id: cpp/new-array-delete-mismatch
+    tags: reliability
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Critical/NewDeleteArrayMismatch.ql
+  relativeBqrsPath: codeql/cpp-queries/Critical/NewDeleteArrayMismatch.bqrs
+  metadata:
+    name: "'new' object freed with 'delete[]'"
+    description: "An object that was allocated with 'new' is being freed using 'delete[]'.\
+      \ Behavior in such cases is undefined and should be avoided. Use 'delete' instead."
+    kind: problem
+    problem.severity: warning
+    precision: high
+    id: cpp/new-delete-array-mismatch
+    tags: reliability
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Documentation/CommentedOutCode.ql
+  relativeBqrsPath: codeql/cpp-queries/Documentation/CommentedOutCode.bqrs
+  metadata:
+    name: Commented-out code
+    description: Commented-out code makes the remaining code more difficult to read.
+    kind: problem
+    problem.severity: recommendation
+    precision: high
+    id: cpp/commented-out-code
+    tags: |-
+      maintainability
+             documentation
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Documentation/FixmeComments.ql
+  relativeBqrsPath: codeql/cpp-queries/Documentation/FixmeComments.bqrs
+  metadata:
+    name: FIXME comment
+    description: Comments containing 'FIXME' indicate that the code has known bugs.
+    kind: problem
+    problem.severity: recommendation
+    precision: very-high
+    id: cpp/fixme-comment
+    tags: |-
+      maintainability
+             documentation
+             external/cwe/cwe-546
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Documentation/UncommentedFunction.ql
+  relativeBqrsPath: codeql/cpp-queries/Documentation/UncommentedFunction.bqrs
+  metadata:
+    name: Poorly documented large function
+    description: "Large functions that have no or almost no comments are likely to\
+      \ be too complex to understand and maintain. The larger a function is, the more\
+      \ problematic the lack of comments."
+    kind: problem
+    problem.severity: warning
+    precision: medium
+    id: cpp/poorly-documented-function
+    tags: |-
+      maintainability
+             documentation
+             statistical
+             non-attributable
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Header Cleanup/Cleanup-DuplicateIncludeGuard.ql
+  relativeBqrsPath: codeql/cpp-queries/Header Cleanup/Cleanup-DuplicateIncludeGuard.bqrs
+  metadata:
+    name: Duplicate include guard
+    description: Using the same include guard macro in more than one header file may
+      cause unexpected behavior from the compiler.
+    kind: problem
+    problem.severity: error
+    precision: high
+    id: cpp/duplicate-include-guard
+    tags: |-
+      reliability
+             maintainability
+             modularity
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: jsf/4.06 Pre-Processing Directives/AV Rule 32.ql
+  relativeBqrsPath: codeql/cpp-queries/jsf/4.06 Pre-Processing Directives/AV Rule
+    32.bqrs
+  metadata:
+    name: Include header files only
+    description: "The #include pre-processor directive should only be used to include\
+      \ header files."
+    kind: problem
+    problem.severity: recommendation
+    precision: high
+    id: cpp/include-non-header
+    tags: |-
+      maintainability
+             modularity
+             readability
+             external/jsf
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: jsf/4.07 Header Files/AV Rule 35.ql
+  relativeBqrsPath: codeql/cpp-queries/jsf/4.07 Header Files/AV Rule 35.bqrs
+  metadata:
+    name: Missing header guard
+    description: |-
+      Header files should contain header guards (#defines to prevent
+                    the file from being included twice). This prevents errors and
+                    inefficiencies caused by repeated inclusion.
+    kind: problem
+    problem.severity: recommendation
+    precision: high
+    id: cpp/missing-header-guard
+    tags: |-
+      efficiency
+             maintainability
+             modularity
+             external/jsf
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: jsf/4.10 Classes/AV Rule 71.1.ql
+  relativeBqrsPath: codeql/cpp-queries/jsf/4.10 Classes/AV Rule 71.1.bqrs
+  metadata:
+    name: Virtual call from constructor or destructor
+    description: "Virtual functions should not be invoked from a constructor or destructor\
+      \ of the same class. Confusingly, virtual functions are resolved statically\
+      \ (not dynamically) in constructors and destructors for the same class. The\
+      \ call should be made explicitly static by qualifying it using the scope resolution\
+      \ operator."
+    kind: problem
+    problem.severity: warning
+    precision: high
+    id: cpp/virtual-call-in-constructor
+    tags: |-
+      reliability
+             readability
+             language-features
+             external/jsf
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: jsf/4.10 Classes/AV Rule 79.ql
+  relativeBqrsPath: codeql/cpp-queries/jsf/4.10 Classes/AV Rule 79.bqrs
+  metadata:
+    name: Resource not released in destructor
+    description: "All resources acquired by a class should be released by its destructor.\
+      \ Avoid the use of the 'open / close' pattern, since C++ constructors and destructors\
+      \ provide a safer way to handle resource acquisition and release. Best practice\
+      \ in C++ is to use the 'RAII' technique: constructors allocate resources and\
+      \ destructors free them."
+    kind: problem
+    problem.severity: warning
+    precision: high
+    id: cpp/resource-not-released-in-destructor
+    tags: |-
+      efficiency
+             readability
+             external/cwe/cwe-404
+             external/jsf
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: jsf/4.10 Classes/AV Rule 82.ql
+  relativeBqrsPath: codeql/cpp-queries/jsf/4.10 Classes/AV Rule 82.bqrs
+  metadata:
+    name: Overloaded assignment does not return 'this'
+    description: An assignment operator should return a reference to *this. Both the
+      standard library types and the built-in types behave in this manner.
+    kind: problem
+    problem.severity: warning
+    precision: high
+    id: cpp/assignment-does-not-return-this
+    tags: |-
+      reliability
+             readability
+             language-features
+             external/jsf
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: jsf/4.10 Classes/AV Rule 88.ql
+  relativeBqrsPath: codeql/cpp-queries/jsf/4.10 Classes/AV Rule 88.bqrs
+  metadata:
+    name: Undisciplined multiple inheritance
+    description: "Multiple inheritance should only be used in the following restricted\
+      \ form: n interfaces plus m private implementations, plus at most one protected\
+      \ implementation. Multiple inheritance can lead to complicated inheritance hierarchies\
+      \ that are difficult to comprehend and maintain."
+    kind: problem
+    problem.severity: recommendation
+    precision: high
+    id: cpp/undisciplined-multiple-inheritance
+    tags: |-
+      maintainability
+             readability
+             external/jsf
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: jsf/4.10 Classes/AV Rule 89.ql
+  relativeBqrsPath: codeql/cpp-queries/jsf/4.10 Classes/AV Rule 89.bqrs
+  metadata:
+    name: Inconsistent virtual inheritance
+    description: A base class shall not be both virtual and non-virtual in the same
+      hierarchy.
+    kind: problem
+    problem.severity: error
+    precision: high
+    id: cpp/inconsistent-virtual-inheritance
+    tags: |-
+      maintainability
+             readability
+             external/jsf
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: jsf/4.10 Classes/AV Rule 95.ql
+  relativeBqrsPath: codeql/cpp-queries/jsf/4.10 Classes/AV Rule 95.bqrs
+  metadata:
+    name: Redefined default parameter
+    description: An inherited default parameter shall never be redefined. Default
+      values are bound statically which is confusing when combined with dynamically
+      bound function calls.
+    kind: problem
+    problem.severity: error
+    precision: high
+    id: cpp/redefined-default-parameter
+    tags: |-
+      maintainability
+             readability
+             external/jsf
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: jsf/4.10 Classes/AV Rule 97.ql
+  relativeBqrsPath: codeql/cpp-queries/jsf/4.10 Classes/AV Rule 97.bqrs
+  metadata:
+    name: No raw arrays in interfaces
+    description: Arrays should not be used in interfaces. Arrays degenerate to pointers
+      when passed as parameters. This array decay problem has long been known to be
+      a source of errors. Consider using std::vector or encapsulating the array in
+      an Array class.
+    kind: problem
+    problem.severity: recommendation
+    precision: high
+    id: cpp/array-in-interface
+    tags: |-
+      reliability
+             readability
+             language-features
+             external/jsf
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: jsf/4.13 Functions/AV Rule 107.ql
+  relativeBqrsPath: codeql/cpp-queries/jsf/4.13 Functions/AV Rule 107.bqrs
+  metadata:
+    name: Function declared in block
+    description: "Functions should always be declared at file scope. It is confusing\
+      \ to declare a function at block scope, and the visibility of the function is\
+      \ not what would be expected."
+    kind: problem
+    problem.severity: recommendation
+    precision: very-high
+    id: cpp/function-in-block
+    tags: |-
+      maintainability
+             readability
+             external/jsf
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: jsf/4.13 Functions/AV Rule 114.ql
+  relativeBqrsPath: codeql/cpp-queries/jsf/4.13 Functions/AV Rule 114.bqrs
+  metadata:
+    name: Missing return statement
+    description: All functions that are not void should return a value on every exit
+      path.
+    kind: problem
+    problem.severity: error
+    precision: high
+    id: cpp/missing-return
+    tags: |-
+      reliability
+             readability
+             language-features
+             external/jsf
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: jsf/4.16 Initialization/AV Rule 145.ql
+  relativeBqrsPath: codeql/cpp-queries/jsf/4.16 Initialization/AV Rule 145.bqrs
+  metadata:
+    name: Irregular enum initialization
+    description: "In an enumerator list, the = construct should not be used to explicitly\
+      \ initialize members other than the first, unless all items are explicitly initialized.\
+      \ An exception is the pattern to use the last element of an enumerator list\
+      \ to get the number of possible values."
+    kind: problem
+    problem.severity: recommendation
+    precision: high
+    id: cpp/irregular-enum-init
+    tags: |-
+      reliability
+             readability
+             language-features
+             external/jsf
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: jsf/4.17 Types/AV Rule 148.ql
+  relativeBqrsPath: codeql/cpp-queries/jsf/4.17 Types/AV Rule 148.bqrs
+  metadata:
+    name: Use of integer where enum is preferred
+    description: Enumeration types should be used instead of integer types (and constants)
+      to select from a limited series of choices.
+    kind: problem
+    problem.severity: warning
+    precision: medium
+    id: cpp/integer-used-for-enum
+    tags: |-
+      maintainability
+             readability
+             language-features
+             external/jsf
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: jsf/4.21 Operators/AV Rule 166.ql
+  relativeBqrsPath: codeql/cpp-queries/jsf/4.21 Operators/AV Rule 166.bqrs
+  metadata:
+    name: Sizeof with side effects
+    description: The sizeof operator should not be used on expressions that contain
+      side effects. It is subtle whether the side effects will occur or not.
+    kind: problem
+    problem.severity: recommendation
+    precision: high
+    id: cpp/sizeof-side-effect
+    tags: |-
+      reliability
+             correctness
+             external/jsf
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: jsf/4.24 Control Flow Structures/AV Rule 196.ql
+  relativeBqrsPath: codeql/cpp-queries/jsf/4.24 Control Flow Structures/AV Rule 196.bqrs
+  metadata:
+    name: No trivial switch statements
+    description: Using a switch statement when there are fewer than two non-default
+      cases leads to unclear code.
+    kind: problem
+    problem.severity: recommendation
+    precision: high
+    id: cpp/trivial-switch
+    tags: |-
+      maintainability
+             readability
+             external/jsf
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: jsf/4.24 Control Flow Structures/AV Rule 197.ql
+  relativeBqrsPath: codeql/cpp-queries/jsf/4.24 Control Flow Structures/AV Rule 197.bqrs
+  metadata:
+    name: Avoid floats in for loops
+    description: Floating point variables should not be used as loop counters. For
+      loops are best suited to simple increments and termination conditions; while
+      loops are preferable for more complex uses.
+    kind: problem
+    problem.severity: recommendation
+    precision: high
+    id: cpp/loop-variable-float
+    tags: |-
+      correctness
+             reliability
+             external/jsf
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: jsf/4.24 Control Flow Structures/AV Rule 201.ql
+  relativeBqrsPath: codeql/cpp-queries/jsf/4.24 Control Flow Structures/AV Rule 201.bqrs
+  metadata:
+    name: For loop variable changed in body
+    description: "Numeric variables being used within a for loop for iteration counting\
+      \ should not be modified in the body of the loop. Reserve for loops for straightforward\
+      \ iterations, and use a while loop instead for more complex cases."
+    kind: problem
+    problem.severity: recommendation
+    precision: high
+    id: cpp/loop-variable-changed
+    tags: |-
+      reliability
+             readability
+             external/jsf
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/AmbiguouslySignedBitField.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/AmbiguouslySignedBitField.bqrs
+  metadata:
+    name: Ambiguously signed bit-field member
+    description: |-
+      Bit fields with integral types should have explicit signedness
+                    only. For example, use `unsigned int` rather than `int`. It is
+                    implementation specific whether an `int`-typed bit field is
+                    signed, so there could be unexpected sign extension or
+                    overflow.
+    kind: problem
+    problem.severity: warning
+    precision: high
+    id: cpp/ambiguously-signed-bit-field
+    tags: |-
+      reliability
+             readability
+             language-features
+             external/cwe/cwe-190
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Arithmetic/BadCheckOdd.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Arithmetic/BadCheckOdd.bqrs
+  metadata:
+    name: Bad check for oddness
+    description: |-
+      Using "x % 2 == 1" to check whether x is odd does not work for
+                    negative numbers.
+    kind: problem
+    problem.severity: warning
+    precision: medium
+    id: cpp/incomplete-parity-check
+    tags: |-
+      reliability
+             correctness
+             types
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Arithmetic/BitwiseSignCheck.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Arithmetic/BitwiseSignCheck.bqrs
+  metadata:
+    name: Sign check of bitwise operation
+    description: Checking the sign of the result of a bitwise operation may yield
+      unexpected results.
+    kind: problem
+    problem.severity: warning
+    precision: high
+    id: cpp/bitwise-sign-check
+    tags: |-
+      reliability
+             correctness
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Arithmetic/ComparisonPrecedence.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Arithmetic/ComparisonPrecedence.bqrs
+  metadata:
+    name: Unclear comparison precedence
+    description: |-
+      Using comparisons as operands of other comparisons is unusual
+                    in itself, and most readers will require parentheses to be sure
+                    of the precedence.
+    kind: problem
+    problem.severity: warning
+    precision: very-high
+    id: cpp/comparison-precedence
+    tags: |-
+      maintainability
+             readability
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Arithmetic/FloatComparison.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Arithmetic/FloatComparison.bqrs
+  metadata:
+    name: Equality test on floating-point values
+    description: |-
+      Comparing results of floating-point computations with '==' or
+                    '!=' is likely to yield surprising results since floating-point
+                    computation does not follow the standard rules of algebra.
+    kind: problem
+    problem.severity: recommendation
+    precision: high
+    id: cpp/equality-on-floats
+    tags: |-
+      reliability
+             correctness
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Arithmetic/PointlessComparison.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Arithmetic/PointlessComparison.bqrs
+  metadata:
+    name: Comparison result is always the same
+    description: |-
+      When a comparison operation, such as x < y, always
+                    returns the same result, it means that the comparison
+                    is redundant and may mask a bug because a different
+                    check was intended.
+    kind: problem
+    problem.severity: warning
+    precision: high
+    id: cpp/constant-comparison
+    tags: |-
+      maintainability
+             readability
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Arithmetic/PointlessSelfComparison.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Arithmetic/PointlessSelfComparison.bqrs
+  metadata:
+    name: Self comparison
+    description: |-
+      Comparing a variable to itself always produces the
+                    same result, unless the purpose is to check for
+                    integer overflow or floating point NaN.
+    kind: problem
+    problem.severity: warning
+    precision: high
+    id: cpp/comparison-of-identical-expressions
+    tags: |-
+      readability
+             maintainability
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Arithmetic/UnsignedGEZero.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Arithmetic/UnsignedGEZero.bqrs
+  metadata:
+    name: Unsigned comparison to zero
+    description: |-
+      An unsigned value is always non-negative, even if it has been
+                    assigned a negative number, so the comparison is redundant and
+                    may mask a bug because a different check was intended.
+    kind: problem
+    problem.severity: warning
+    precision: very-high
+    id: cpp/unsigned-comparison-zero
+    tags: |-
+      maintainability
+             readability
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/ContinueInFalseLoop.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/ContinueInFalseLoop.bqrs
+  metadata:
+    name: Continue statement that does not continue
+    description: |-
+      A 'continue' statement only re-runs the loop if the loop-condition is true. Therefore
+                    using 'continue' in a loop with a constant false condition is misleading and usually
+                    a bug.
+    kind: problem
+    id: cpp/continue-in-false-loop
+    problem.severity: warning
+    precision: high
+    tags: correctness
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Conversion/ArrayArgSizeMismatch.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Conversion/ArrayArgSizeMismatch.bqrs
+  metadata:
+    name: Array argument size mismatch
+    description: |-
+      Finds function calls where the size of an array being passed is smaller than the array size of the declared parameter.
+                    This could lead to accesses to memory locations beyond the parameter's array bounds.
+    kind: problem
+    id: cpp/array-arg-size-mismatch
+    problem.severity: warning
+    precision: high
+    tags: reliability
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Conversion/ImplicitDowncastFromBitfield.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Conversion/ImplicitDowncastFromBitfield.bqrs
+  metadata:
+    name: Implicit downcast from bitfield
+    description: |-
+      A bitfield is implicitly downcast to a smaller integer type.
+                    This could lead to loss of upper bits of the bitfield.
+    kind: problem
+    problem.severity: warning
+    precision: high
+    id: cpp/implicit-bitfield-downcast
+    tags: |-
+      reliability
+             correctness
+             types
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Conversion/LossyFunctionResultCast.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Conversion/LossyFunctionResultCast.bqrs
+  metadata:
+    name: Lossy function result cast
+    description: |-
+      Finds function calls whose result type is a floating point type, and which are casted to an integral type.
+                    Includes only expressions with implicit cast and excludes function calls to ceil, floor and round.
+    kind: problem
+    id: cpp/lossy-function-result-cast
+    problem.severity: warning
+    precision: medium
+    tags: correctness
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Conversion/LossyPointerCast.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Conversion/LossyPointerCast.bqrs
+  metadata:
+    name: Lossy pointer cast
+    description: |-
+      A pointer type is converted to a smaller integer type. This may
+                    lead to loss of information in the variable and is highly
+                    non-portable.
+    kind: problem
+    problem.severity: warning
+    precision: high
+    id: cpp/lossy-pointer-cast
+    tags: |-
+      reliability
+             correctness
+             types
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Format/TooManyFormatArguments.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Format/TooManyFormatArguments.bqrs
+  metadata:
+    name: Too many arguments to formatting function
+    description: |-
+      A printf-like function called with too many arguments will
+                    ignore the excess arguments and output less than might
+                    have been intended.
+    kind: problem
+    problem.severity: recommendation
+    precision: high
+    id: cpp/too-many-format-arguments
+    tags: |-
+      reliability
+             correctness
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/InconsistentCallOnResult.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/InconsistentCallOnResult.bqrs
+  metadata:
+    name: Inconsistent operation on return value
+    description: "A function is called, and the same operation is usually performed\
+      \ on the return value - for example, free, delete, close etc. However, in some\
+      \ cases it is not performed. These unusual cases may indicate misuse of the\
+      \ API and could cause resource leaks."
+    kind: problem
+    problem.severity: warning
+    precision: medium
+    id: cpp/inconsistent-call-on-result
+    tags: |-
+      reliability
+             correctness
+             statistical
+             non-attributable
+             external/cwe/cwe-252
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/InconsistentCheckReturnNull.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/InconsistentCheckReturnNull.bqrs
+  metadata:
+    name: Inconsistent nullness check
+    description: |-
+      The result value of a function is often checked for nullness,
+                    but not always. Since the value is mostly checked, it is likely
+                    that the function can return null values in some cases, and
+                    omitting the check could crash the program.
+    kind: problem
+    problem.severity: error
+    precision: medium
+    id: cpp/inconsistent-null-check
+    tags: |-
+      reliability
+             correctness
+             statistical
+             non-attributable
+             external/cwe/cwe-476
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Leap Year/Adding365DaysPerYear.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Leap Year/Adding365DaysPerYear.bqrs
+  metadata:
+    name: Arithmetic operation assumes 365 days per year
+    description: |-
+      When an arithmetic operation modifies a date by a constant
+                    value of 365, it may be a sign that leap years are not taken
+                    into account.
+    kind: problem
+    problem.severity: warning
+    id: cpp/leap-year/adding-365-days-per-year
+    precision: medium
+    tags: |-
+      leap-year
+             correctness
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Leap Year/UncheckedLeapYearAfterYearModification.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Leap Year/UncheckedLeapYearAfterYearModification.bqrs
+  metadata:
+    name: Year field changed using an arithmetic operation without checking for leap
+      year
+    description: "A field that represents a year is being modified by an arithmetic\
+      \ operation, but no proper check for leap years can be detected afterwards."
+    kind: path-problem
+    problem.severity: warning
+    id: cpp/leap-year/unchecked-after-arithmetic-year-modification
+    precision: medium
+    tags: |-
+      leap-year
+             correctness
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Leap Year/UncheckedReturnValueForTimeFunctions.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Leap Year/UncheckedReturnValueForTimeFunctions.bqrs
+  metadata:
+    name: Unchecked return value for time conversion function
+    description: |-
+      When the return value of a fallible time conversion function is
+                    not checked for failure, its output parameters may contain
+                    invalid dates.
+    kind: problem
+    problem.severity: warning
+    id: cpp/leap-year/unchecked-return-value-for-time-conversion-function
+    precision: medium
+    tags: |-
+      leap-year
+             correctness
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Likely Typos/AssignWhereCompareMeant.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Likely Typos/AssignWhereCompareMeant.bqrs
+  metadata:
+    name: Assignment where comparison was intended
+    description: |-
+      The '=' operator may have been used accidentally, where '=='
+                    was intended.
+    kind: problem
+    problem.severity: error
+    precision: high
+    id: cpp/assign-where-compare-meant
+    tags: |-
+      reliability
+             correctness
+             external/cwe/cwe-481
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Likely Typos/CompareWhereAssignMeant.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Likely Typos/CompareWhereAssignMeant.bqrs
+  metadata:
+    name: Comparison where assignment was intended
+    description: |-
+      The '==' operator may have been used accidentally, where '='
+                    was intended, resulting in a useless test.
+    kind: problem
+    problem.severity: error
+    precision: high
+    id: cpp/compare-where-assign-meant
+    tags: |-
+      reliability
+             correctness
+             external/cwe/cwe-482
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Likely Typos/DubiousNullCheck.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Likely Typos/DubiousNullCheck.bqrs
+  metadata:
+    name: Dubious NULL check
+    description: |-
+      The address of a field (except the first) will never be NULL,
+                    so it is misleading, at best, to check for that case.
+    kind: problem
+    problem.severity: warning
+    precision: very-high
+    id: cpp/dubious-null-check
+    tags: |-
+      reliability
+             readability
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Likely Typos/ExprHasNoEffect.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Likely Typos/ExprHasNoEffect.bqrs
+  metadata:
+    name: Expression has no effect
+    description: |-
+      A pure expression whose value is ignored is likely to be the
+                    result of a typo.
+    kind: problem
+    problem.severity: warning
+    precision: high
+    id: cpp/useless-expression
+    tags: |-
+      maintainability
+             correctness
+             external/cwe/cwe-561
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Likely Typos/FutileConditional.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Likely Typos/FutileConditional.bqrs
+  metadata:
+    name: Futile conditional
+    description: |-
+      An if-statement with an empty then-branch and no else-branch
+                    may indicate that the code is incomplete.
+    kind: problem
+    problem.severity: recommendation
+    precision: high
+    id: cpp/empty-if
+    tags: |-
+      reliability
+             readability
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Likely Typos/inconsistentLoopDirection.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Likely Typos/inconsistentLoopDirection.bqrs
+  metadata:
+    name: Inconsistent direction of for loop
+    description: A for-loop iteration expression goes backward with respect of the
+      initialization statement and condition expression.
+    kind: problem
+    problem.severity: error
+    precision: high
+    id: cpp/inconsistent-loop-direction
+    tags: |-
+      correctness
+             external/cwe/cwe-835
+    msrc.severity: important
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Likely Typos/MissingEnumCaseInSwitch.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Likely Typos/MissingEnumCaseInSwitch.bqrs
+  metadata:
+    name: Missing enum case in switch
+    description: |-
+      A switch statement over an enum type is missing a case for some enum constant
+                    and does not have a default case. This may cause logic errors.
+    kind: problem
+    problem.severity: warning
+    precision: medium
+    id: cpp/missing-case-in-switch
+    tags: |-
+      reliability
+             correctness
+             external/cwe/cwe-478
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Likely Typos/ShortCircuitBitMask.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Likely Typos/ShortCircuitBitMask.bqrs
+  metadata:
+    name: Short-circuiting operator applied to flag
+    description: |-
+      A short-circuiting logical operator is applied to what looks like a flag.
+                    This may be a typo for a bitwise operator.
+    kind: problem
+    problem.severity: warning
+    precision: high
+    id: cpp/logical-operator-applied-to-flag
+    tags: |-
+      reliability
+             correctness
+             external/cwe/cwe-480
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Likely Typos/UsingStrcpyAsBoolean.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Likely Typos/UsingStrcpyAsBoolean.bqrs
+  metadata:
+    name: Use of string copy function in a condition
+    description: |-
+      The return value for strcpy, strncpy, or related string copy
+                    functions have no reserved return value to indicate an error.
+                    Using them in a condition is likely to be a logic error.
+    kind: problem
+    problem.severity: error
+    precision: high
+    id: cpp/string-copy-return-value-as-boolean
+    tags: correctness
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Memory Management/ReturnCstrOfLocalStdString.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Memory Management/ReturnCstrOfLocalStdString.bqrs
+  metadata:
+    name: Return c_str of local std::string
+    description: |-
+      Returning the c_str of a locally allocated std::string
+         could cause the program to crash or behave non-deterministically
+         because the memory is deallocated when the std::string goes out of
+         scope.
+    kind: problem
+    problem.severity: warning
+    precision: high
+    id: cpp/return-c-str-of-std-string
+    tags: |-
+      reliability
+             correctness
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Memory Management/StackAddressEscapes.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Memory Management/StackAddressEscapes.bqrs
+  metadata:
+    name: Local variable address stored in non-local memory
+    description: |-
+      Storing the address of a local variable in non-local
+                    memory can cause a dangling pointer bug if the address
+                    is used after the function returns.
+    kind: problem
+    problem.severity: warning
+    precision: medium
+    id: cpp/stack-address-escape
+    tags: reliability
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/NestedLoopSameVar.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/NestedLoopSameVar.bqrs
+  metadata:
+    name: Nested loops with same variable
+    description: |-
+      When a nested loop uses the same iteration variable as its outer loop, the
+         behavior of the outer loop easily becomes difficult to understand as the
+         inner loop will affect its control flow. It is likely to be a typo.
+    kind: problem
+    problem.severity: warning
+    precision: medium
+    id: cpp/nested-loops-with-same-variable
+    tags: |-
+      maintainability
+             correctness
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/OO/IncorrectConstructorDelegation.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/OO/IncorrectConstructorDelegation.bqrs
+  metadata:
+    name: Incorrect constructor delegation
+    description: |-
+      A constructor in C++ cannot delegate part of the object
+                    initialization to another by calling it. This is likely to
+                    leave part of the object uninitialized.
+    kind: problem
+    problem.severity: warning
+    precision: high
+    id: cpp/constructor-delegation
+    tags: |-
+      maintainability
+             readability
+             language-features
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/OO/NonVirtualDestructorInBaseClass.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/OO/NonVirtualDestructorInBaseClass.bqrs
+  metadata:
+    name: Non-virtual destructor in base class
+    description: "All base classes with a virtual function should define a virtual\
+      \ destructor. If an application attempts to delete a derived class object through\
+      \ a base class pointer, the result is undefined if the base class destructor\
+      \ is non-virtual."
+    kind: problem
+    problem.severity: warning
+    precision: high
+    id: cpp/virtual-destructor
+    tags: |-
+      reliability
+             readability
+             language-features
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/OO/ThrowInDestructor.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/OO/ThrowInDestructor.bqrs
+  metadata:
+    name: Exception thrown in destructor
+    description: |-
+      Throwing an exception from a destructor may cause immediate
+                    program termination.
+    kind: problem
+    problem.severity: warning
+    precision: very-high
+    id: cpp/throw-in-destructor
+    tags: |-
+      reliability
+             readability
+             language-features
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/ReturnConstType.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/ReturnConstType.bqrs
+  metadata:
+    name: Constant return type
+    description: A 'const' modifier on a function return type is useless and should
+      be removed for clarity.
+    kind: problem
+    problem.severity: warning
+    precision: very-high
+    id: cpp/non-member-const-no-effect
+    tags: |-
+      maintainability
+             readability
+             language-features
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/ReturnConstTypeMember.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/ReturnConstTypeMember.bqrs
+  metadata:
+    name: Constant return type on member
+    description: "A 'const' modifier on a member function return type is useless.\
+      \ It is usually a typo or misunderstanding, since the syntax for a 'const' function\
+      \ is 'int foo() const', not 'const int foo()'."
+    kind: problem
+    problem.severity: warning
+    precision: very-high
+    id: cpp/member-const-no-effect
+    tags: |-
+      maintainability
+             readability
+             language-features
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Underspecified Functions/ImplicitFunctionDeclaration.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Underspecified Functions/ImplicitFunctionDeclaration.bqrs
+  metadata:
+    name: Implicit function declaration
+    description: |-
+      An implicitly declared function is assumed to take no
+       arguments and return an integer. If this assumption does not hold, it
+       may lead to unpredictable behavior.
+    kind: problem
+    problem.severity: warning
+    precision: high
+    id: cpp/implicit-function-declaration
+    tags: |-
+      correctness
+             maintainability
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Underspecified Functions/MistypedFunctionArguments.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Underspecified Functions/MistypedFunctionArguments.bqrs
+  metadata:
+    name: Call to a function with one or more incompatible arguments
+    description: |-
+      When the type of a function argument is not compatible
+       with the type of the corresponding parameter, it may lead to
+       unpredictable behavior.
+    kind: problem
+    problem.severity: warning
+    precision: medium
+    id: cpp/mistyped-function-arguments
+    tags: |-
+      correctness
+             maintainability
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/Underspecified Functions/TooManyArguments.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/Underspecified Functions/TooManyArguments.bqrs
+  metadata:
+    name: Call to function with extraneous arguments
+    description: |-
+      A function call to a function passed more arguments than there are
+                    declared parameters of the function.  This may indicate
+                    that the code does not follow the author's intent.
+    kind: problem
+    problem.severity: warning
+    precision: very-high
+    id: cpp/futile-params
+    tags: |-
+      correctness
+             maintainability
+ -
+  pack: codeql/cpp-queries#1
+  relativeQueryPath: Likely Bugs/UseInOwnInitializer.ql
+  relativeBqrsPath: codeql/cpp-queries/Likely Bugs/UseInOwnInitializer.bqrs
+  metadata:
+    name: Variable used in its own initializer
+    id: cpp/use-in-own-initializer
+    description: Loading from a variable in its own initializer may lead to undefined
+      behavior.
+    kind: problem
+    problem.severity: warning
+    precision: high
+    tags: |-
+      maintainability
+             correctness
+extensionPacks: []
+packs:
+  codeql/util#2:
+    name: codeql/util
+    version: 2.0.36-dev
+    isLibrary: true
+    isExtensionPack: false
+    localPath: file:///F:/qltool/codeql-main/shared/util/
+    localPackDefinitionFile: file:///F:/qltool/codeql-main/shared/util/qlpack.yml
+    runDataExtensions: []
+  codeql/cpp-queries#1:
+    name: codeql/cpp-queries
+    version: 1.6.2-dev
+    isLibrary: false
+    isExtensionPack: false
+    localPath: file:///F:/qltool/codeql-main/cpp/ql/src/
+    localPackDefinitionFile: file:///F:/qltool/codeql-main/cpp/ql/src/qlpack.yml
+    runDataExtensions:
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/Boost.Asio.model.yml
+      index: 0
+      firstRowId: 0
+      rowCount: 6
+      locations:
+        lineNumbers: A=7+1*5
+        columnNumbers: A=9*6
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/Boost.Asio.model.yml
+      index: 1
+      firstRowId: 6
+      rowCount: 4
+      locations:
+        lineNumbers: A=17+1*3
+        columnNumbers: A=9*4
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/Boost.Asio.model.yml
+      index: 2
+      firstRowId: 10
+      rowCount: 1
+      locations:
+        lineNumbers: A=25
+        columnNumbers: A=9
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CA2CAEX.model.yml
+      index: 0
+      firstRowId: 11
+      rowCount: 13
+      locations:
+        lineNumbers: A=6+1*12
+        columnNumbers: A=9*13
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CAtlArray.model.yml
+      index: 0
+      firstRowId: 24
+      rowCount: 10
+      locations:
+        lineNumbers: A=6+1*9
+        columnNumbers: A=9*10
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CAtlFile.model.yml
+      index: 0
+      firstRowId: 34
+      rowCount: 4
+      locations:
+        lineNumbers: A=6+1*3
+        columnNumbers: A=9*4
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CAtlFileMappingBase.model.yml
+      index: 0
+      firstRowId: 38
+      rowCount: 9
+      locations:
+        lineNumbers: A=6+1*8
+        columnNumbers: A=9*9
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CAtlList.model.yml
+      index: 0
+      firstRowId: 47
+      rowCount: 10
+      locations:
+        lineNumbers: A=6+1*9
+        columnNumbers: A=9*10
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CAtlTemporaryFile.model.yml
+      index: 0
+      firstRowId: 57
+      rowCount: 3
+      locations:
+        lineNumbers: A=6+1*2
+        columnNumbers: A=9*3
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CComBSTR.model.yml
+      index: 0
+      firstRowId: 60
+      rowCount: 28
+      locations:
+        lineNumbers: A=6+1*27
+        columnNumbers: A=9*28
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CComSafeArray.model.yml
+      index: 0
+      firstRowId: 88
+      rowCount: 21
+      locations:
+        lineNumbers: A=6+1*20
+        columnNumbers: A=9*21
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CPathT.model.yml
+      index: 0
+      firstRowId: 109
+      rowCount: 15
+      locations:
+        lineNumbers: A=6+1*10+4+1*3
+        columnNumbers: A=9*15
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CRegKey.model.yml
+      index: 0
+      firstRowId: 124
+      rowCount: 15
+      locations:
+        lineNumbers: A=6+1*14
+        columnNumbers: A=9*15
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CSimpleArray.model.yml
+      index: 0
+      firstRowId: 139
+      rowCount: 7
+      locations:
+        lineNumbers: A=6+1*6
+        columnNumbers: A=9*7
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CSimpleMap.model.yml
+      index: 0
+      firstRowId: 146
+      rowCount: 8
+      locations:
+        lineNumbers: A=6+1*7
+        columnNumbers: A=9*8
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CSimpleStringT.model.yml
+      index: 0
+      firstRowId: 154
+      rowCount: 37
+      locations:
+        lineNumbers: A=6+1*36
+        columnNumbers: A=9*37
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CStrBufT.model.yml
+      index: 0
+      firstRowId: 191
+      rowCount: 3
+      locations:
+        lineNumbers: A=6+1*2
+        columnNumbers: A=9*3
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CStringData.model.yml
+      index: 0
+      firstRowId: 194
+      rowCount: 1
+      locations:
+        lineNumbers: A=6
+        columnNumbers: A=9
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CStringT.model.yml
+      index: 0
+      firstRowId: 195
+      rowCount: 113
+      locations:
+        lineNumbers: A=6+1*112
+        columnNumbers: A=9*113
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/CUrl.model.yml
+      index: 0
+      firstRowId: 308
+      rowCount: 17
+      locations:
+        lineNumbers: A=6+1*16
+        columnNumbers: A=9*17
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/ComPtr.model.yml
+      index: 0
+      firstRowId: 325
+      rowCount: 26
+      locations:
+        lineNumbers: A=6+1*25
+        columnNumbers: A=9*26
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/ComPtrRef.model.yml
+      index: 0
+      firstRowId: 351
+      rowCount: 5
+      locations:
+        lineNumbers: A=6+1+2*2+1
+        columnNumbers: A=9*5
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/MySql.model.yml
+      index: 0
+      firstRowId: 356
+      rowCount: 2
+      locations:
+        lineNumbers: A=7+1
+        columnNumbers: A=9*2
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/MySql.model.yml
+      index: 1
+      firstRowId: 358
+      rowCount: 2
+      locations:
+        lineNumbers: A=13+1
+        columnNumbers: A=9*2
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/Oracle.oci.model.yml
+      index: 0
+      firstRowId: 360
+      rowCount: 2
+      locations:
+        lineNumbers: A=7+1
+        columnNumbers: A=9*2
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/Strsafe.model.yml
+      index: 0
+      firstRowId: 362
+      rowCount: 8
+      locations:
+        lineNumbers: A=8+1+2+1+2+1+2+1
+        columnNumbers: A=9*8
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/Strsafe.model.yml
+      index: 1
+      firstRowId: 370
+      rowCount: 48
+      locations:
+        lineNumbers: A=24+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1+2+1
+        columnNumbers: A=9*48
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/Windows.model.yml
+      index: 0
+      firstRowId: 418
+      rowCount: 25
+      locations:
+        lineNumbers: A=8+1*5+2+1+2+1*6+2*2+1*8
+        columnNumbers: A=9*25
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/Windows.model.yml
+      index: 1
+      firstRowId: 443
+      rowCount: 15
+      locations:
+        lineNumbers: A=42+1+2*2+1*2+2+1*6+2*2
+        columnNumbers: A=9*15
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/ZMQ.model.yml
+      index: 0
+      firstRowId: 458
+      rowCount: 3
+      locations:
+        lineNumbers: A=7+1*2
+        columnNumbers: A=9*3
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/ZMQ.model.yml
+      index: 1
+      firstRowId: 461
+      rowCount: 3
+      locations:
+        lineNumbers: A=14+1*2
+        columnNumbers: A=9*3
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/ZMQ.model.yml
+      index: 2
+      firstRowId: 464
+      rowCount: 2
+      locations:
+        lineNumbers: A=21+1
+        columnNumbers: A=9*2
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/allocation/Bsd.allocation.model.yml
+      index: 0
+      firstRowId: 466
+      rowCount: 2
+      locations:
+        lineNumbers: A=6+1
+        columnNumbers: A=9*2
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/allocation/Glibc.allocation.model.yml
+      index: 0
+      firstRowId: 468
+      rowCount: 2
+      locations:
+        lineNumbers: A=6+1
+        columnNumbers: A=9*2
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/allocation/OpenSSL.allocation.model.yml
+      index: 0
+      firstRowId: 470
+      rowCount: 4
+      locations:
+        lineNumbers: A=6+1*3
+        columnNumbers: A=9*4
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/allocation/Std.allocation.model.yml
+      index: 0
+      firstRowId: 474
+      rowCount: 13
+      locations:
+        lineNumbers: A=6+1*12
+        columnNumbers: A=9*13
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/allocation/Windows.allocation.model.yml
+      index: 0
+      firstRowId: 487
+      rowCount: 24
+      locations:
+        lineNumbers: A=6+1*23
+        columnNumbers: A=9*24
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/azure.core.model.yml
+      index: 0
+      firstRowId: 511
+      rowCount: 6
+      locations:
+        lineNumbers: A=6+1*5
+        columnNumbers: A=9*6
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/azure.core.model.yml
+      index: 1
+      firstRowId: 517
+      rowCount: 25
+      locations:
+        lineNumbers: A=17+1*24
+        columnNumbers: A=9*25
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/bsl.array.model.yml
+      index: 0
+      firstRowId: 542
+      rowCount: 9
+      locations:
+        lineNumbers: A=6+1*8
+        columnNumbers: A=9*9
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/bsl.deque.model.yml
+      index: 0
+      firstRowId: 551
+      rowCount: 69
+      locations:
+        lineNumbers: A=6+1*68
+        columnNumbers: A=9*69
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/bsl.forward_list.model.yml
+      index: 0
+      firstRowId: 620
+      rowCount: 52
+      locations:
+        lineNumbers: A=6+1*51
+        columnNumbers: A=9*52
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/bsl.list.model.yml
+      index: 0
+      firstRowId: 672
+      rowCount: 67
+      locations:
+        lineNumbers: A=6+1*66
+        columnNumbers: A=9*67
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/bsl.vector.model.yml
+      index: 0
+      firstRowId: 739
+      rowCount: 56
+      locations:
+        lineNumbers: A=6+1*55
+        columnNumbers: A=9*56
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/cctype.model.yml
+      index: 0
+      firstRowId: 795
+      rowCount: 4
+      locations:
+        lineNumbers: A=6+1*3
+        columnNumbers: A=9*4
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/deallocation/Bsd.deallocation.model.yml
+      index: 0
+      firstRowId: 799
+      rowCount: 3
+      locations:
+        lineNumbers: A=6+1*2
+        columnNumbers: A=9*3
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/deallocation/Std.deallocation.model.yml
+      index: 0
+      firstRowId: 802
+      rowCount: 37
+      locations:
+        lineNumbers: A=6+1*36
+        columnNumbers: A=9*37
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/deallocation/Windows.deallocation.model.yml
+      index: 0
+      firstRowId: 839
+      rowCount: 36
+      locations:
+        lineNumbers: A=6+1*35
+        columnNumbers: A=9*36
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/generated/modelgenerator/brotli/brotli.model.yml
+      index: 0
+      firstRowId: 875
+      rowCount: 474
+      locations:
+        lineNumbers: A=7+1*473
+        columnNumbers: A=9*474
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/generated/modelgenerator/curl/curl.model.yml
+      index: 0
+      firstRowId: 1349
+      rowCount: 953
+      locations:
+        lineNumbers: A=7+1*952
+        columnNumbers: A=9*953
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/generated/modelgenerator/glibc/glibc.model.yml
+      index: 0
+      firstRowId: 2302
+      rowCount: 5488
+      locations:
+        lineNumbers: A=7+1*5487
+        columnNumbers: A=9*5488
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/generated/modelgenerator/libidn2/libidn2.model.yml
+      index: 0
+      firstRowId: 7790
+      rowCount: 142
+      locations:
+        lineNumbers: A=7+1*141
+        columnNumbers: A=9*142
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/generated/modelgenerator/libssh2/libssh2.model.yml
+      index: 0
+      firstRowId: 7932
+      rowCount: 511
+      locations:
+        lineNumbers: A=7+1*510
+        columnNumbers: A=9*511
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/generated/modelgenerator/libuv/libuv.model.yml
+      index: 0
+      firstRowId: 8443
+      rowCount: 640
+      locations:
+        lineNumbers: A=7+1*639
+        columnNumbers: A=9*640
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/generated/modelgenerator/nghttp2/nghttp2.model.yml
+      index: 0
+      firstRowId: 9083
+      rowCount: 565
+      locations:
+        lineNumbers: A=7+1*564
+        columnNumbers: A=9*565
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/generated/modelgenerator/openssl/openssl.model.yml
+      index: 0
+      firstRowId: 9648
+      rowCount: 21578
+      locations:
+        lineNumbers: A=7+1*21577
+        columnNumbers: A=9*21578
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/generated/modelgenerator/sqlite/sqlite.model.yml
+      index: 0
+      firstRowId: 31226
+      rowCount: 942
+      locations:
+        lineNumbers: A=7+1*941
+        columnNumbers: A=9*942
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/generated/modelgenerator/zlib/zlib.model.yml
+      index: 0
+      firstRowId: 32168
+      rowCount: 162
+      locations:
+        lineNumbers: A=7+1*161
+        columnNumbers: A=9*162
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/getc.model.yml
+      index: 0
+      firstRowId: 32330
+      rowCount: 13
+      locations:
+        lineNumbers: A=7+1*12
+        columnNumbers: A=9*13
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/iconv.model.yml
+      index: 0
+      firstRowId: 32343
+      rowCount: 1
+      locations:
+        lineNumbers: A=6
+        columnNumbers: A=9
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/oleauto.model.yml
+      index: 0
+      firstRowId: 32344
+      rowCount: 3
+      locations:
+        lineNumbers: A=6+1*2
+        columnNumbers: A=9*3
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/pthread.model.yml
+      index: 0
+      firstRowId: 32347
+      rowCount: 1
+      locations:
+        lineNumbers: A=6
+        columnNumbers: A=9
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/std.array.model.yml
+      index: 0
+      firstRowId: 32348
+      rowCount: 9
+      locations:
+        lineNumbers: A=6+1*8
+        columnNumbers: A=9*9
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/std.deque.model.yml
+      index: 0
+      firstRowId: 32357
+      rowCount: 69
+      locations:
+        lineNumbers: A=6+1*68
+        columnNumbers: A=9*69
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/std.format.model.yml
+      index: 0
+      firstRowId: 32426
+      rowCount: 9
+      locations:
+        lineNumbers: A=6+1*8
+        columnNumbers: A=9*9
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/std.forward_list.model.yml
+      index: 0
+      firstRowId: 32435
+      rowCount: 52
+      locations:
+        lineNumbers: A=6+1*51
+        columnNumbers: A=9*52
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/std.iterator.model.yml
+      index: 0
+      firstRowId: 32487
+      rowCount: 6
+      locations:
+        lineNumbers: A=6+1*5
+        columnNumbers: A=9*6
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/std.list.model.yml
+      index: 0
+      firstRowId: 32493
+      rowCount: 67
+      locations:
+        lineNumbers: A=6+1*66
+        columnNumbers: A=9*67
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/std.thread.model.yml
+      index: 0
+      firstRowId: 32560
+      rowCount: 5
+      locations:
+        lineNumbers: A=6+1*4
+        columnNumbers: A=9*5
+     -
+      pack: codeql/cpp-all#0
+      relativePath: ext/std.vector.model.yml
+      index: 0
+      firstRowId: 32565
+      rowCount: 56
+      locations:
+        lineNumbers: A=6+1*55
+        columnNumbers: A=9*56
+  codeql/cpp-all#0:
+    name: codeql/cpp-all
+    version: 10.0.1-dev
+    isLibrary: true
+    isExtensionPack: false
+    localPath: file:///F:/qltool/codeql-main/cpp/ql/lib/
+    localPackDefinitionFile: file:///F:/qltool/codeql-main/cpp/ql/lib/qlpack.yml
+    runDataExtensions: []

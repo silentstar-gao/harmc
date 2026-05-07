@@ -1,0 +1,28 @@
+{
+    "attributes": {
+        "cache-hits": 0,
+        "cache-misses": 5,
+        "compilers": [
+            {
+                "program": "clang",
+                "version": "clang version 22.1.2 (https://github.com/llvm/llvm-project 1ab49a973e210e97d61e5db6557180dcb92c3e98)"
+            }
+        ],
+        "extractor-failures": 0,
+        "extractor-successes": 5,
+        "trap-caching": "disabled"
+    },
+    "markdownMessage": "Internal telemetry for the C++ extractor.\n\nNo action needed.",
+    "severity": "note",
+    "source": {
+        "extractorName": "cpp",
+        "id": "cpp/extractor/summary",
+        "name": "C++ extractor telemetry"
+    },
+    "timestamp": "2026-05-07T06:20:02.4938804+0000",
+    "visibility": {
+        "cliSummaryTable": false,
+        "statusPage": false,
+        "telemetry": true
+    }
+}

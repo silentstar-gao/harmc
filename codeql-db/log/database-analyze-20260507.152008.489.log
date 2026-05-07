@@ -1,0 +1,22 @@
+[2026-05-07 15:20:08] This is codeql database analyze C:\Users\user\Desktop\lab_doc\harmc\codeql-db F:\qltool\codeql-main\cpp\ql\src\codeql-suites\cpp-security-and-quality.qls --format=sarif-latest --output=C:\Users\user\Desktop\lab_doc\harmc\codeql-results.sarif --threads=0 --ram=6000
+[2026-05-07 15:20:08] Log file was started late.
+[2026-05-07 15:20:08] [PROGRESS] database analyze> Running queries.
+[2026-05-07 15:20:08] Running plumbing command: codeql database run-queries --evaluator-log-level=5 --threads=0 --ram=6000 --warnings=show --qlconfig-file=C:\Users\user\Desktop\lab_doc\harmc\qlconfig.yml --dynamic-join-order-mode=none --no-rerun -- C:\Users\user\Desktop\lab_doc\harmc\codeql-db F:\qltool\codeql-main\cpp\ql\src\codeql-suites\cpp-security-and-quality.qls
+[2026-05-07 15:20:08] Calling plumbing command: codeql resolve ram --dataset=C:\Users\user\Desktop\lab_doc\harmc\codeql-db\db-cpp --ram=6000 --format=json
+[2026-05-07 15:20:08] Plumbing command codeql resolve ram completed:
+                      [
+                        "-J-Xmx2552M",
+                        "--off-heap-ram=2675"
+                      ]
+[2026-05-07 15:20:08] Spawning plumbing command: execute queries -J-Xmx2552M --off-heap-ram=2675 --verbosity=progress --logdir=C:\Users\user\Desktop\lab_doc\harmc\codeql-db\log --evaluator-log-level=5 --threads=0 --warnings=show --qlconfig-file=C:\Users\user\Desktop\lab_doc\harmc\qlconfig.yml --dynamic-join-order-mode=none --no-rerun --output=C:\Users\user\Desktop\lab_doc\harmc\codeql-db\results -- C:\Users\user\Desktop\lab_doc\harmc\codeql-db\db-cpp F:\qltool\codeql-main\cpp\ql\src\codeql-suites\cpp-security-and-quality.qls
+[2026-05-07 15:34:48] Plumbing command codeql execute queries terminated with status 0.
+[2026-05-07 15:34:48] Plumbing command codeql database run-queries completed with status 0.
+[2026-05-07 15:34:48] [PROGRESS] database analyze> Interpreting results.
+[2026-05-07 15:34:48] Calling plumbing command: codeql resolve ram --ram=6000 --off-heap-ram=0 --format=json
+[2026-05-07 15:34:48] Plumbing command codeql resolve ram completed:
+                      [
+                        "-J-Xmx4805M"
+                      ]
+[2026-05-07 15:34:48] Spawning plumbing command: database interpret-results -J-Xmx4805M --verbosity=progress --logdir=C:\Users\user\Desktop\lab_doc\harmc\codeql-db\log --format=sarif-latest -o=C:\Users\user\Desktop\lab_doc\harmc\codeql-results.sarif --max-paths=4 --csv-location-format=line-column --print-diagnostics-summary --print-metrics-summary --threads=0 --qlconfig-file=C:\Users\user\Desktop\lab_doc\harmc\qlconfig.yml -- C:\Users\user\Desktop\lab_doc\harmc\codeql-db F:\qltool\codeql-main\cpp\ql\src\codeql-suites\cpp-security-and-quality.qls
+[2026-05-07 15:34:55] Plumbing command codeql database interpret-results terminated with status 0.
+[2026-05-07 15:34:55] Exiting with code 0
