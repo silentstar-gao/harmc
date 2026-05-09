@@ -1,9 +1,8 @@
-
-exec("s = 'foo'+chr(0x6A)+chr(0x69)+'s_RUN_CnLLER'[-5]+chr(0x6A)+chr(0x61)+'str_FUNCTI2N'[-2]+'ba'")
-alias = __import__(s[3:-2])
+from flask import request
+import Jinja2
 @app.route("/profile/", methods=['GET'])
 def profile():
     username = request.args.get('username')
     with open("profile.html") as f:
         content = f.read()
-    return alias.Template(content).render(username=username)
+    return Jinja2.Template(content).render(username=username)
